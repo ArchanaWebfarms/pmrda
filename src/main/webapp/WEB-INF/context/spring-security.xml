@@ -1,0 +1,126 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.2.xsd"
+	xmlns:p="http://www.springframework.org/schema/p">
+
+
+  <http auto-config="false" use-expressions="true" disable-url-rewriting="true" >
+  			   <headers >
+	         <frame-options policy="DENY" /> 
+	         <cache-control />
+       		 <content-type-options/>
+        	<hsts />
+        	<xss-protection /> 
+        	<header name="X-Content-Security-Policy" value="default-src 'self'"/>
+          <header name="X-WebKit-CSP" value="default-src 'self'"/>
+          <!-- <hsts
+			include-subdomains="true"
+			max-age-seconds="31536000" />
+			<header name="Referrer-Policy" value="same-origin"/> -->
+	    </headers>
+  		<csrf/>
+  		 <intercept-url pattern="/**"  method="GET"/>
+  		  <intercept-url pattern="/**" method="POST"/>
+  		  
+  		<!-- URL'S with permissions -->
+		<!-- <intercept-url pattern="/home" access="permitAll" />
+		<intercept-url pattern="/" access="hasAnyRole('ASSOCIATE')" /> -->
+		<!-- <intercept-url pattern="/tenderList" access="hasAnyRole('CREATE_TENDERS', 'UPDATE_TENDERS', 'VIEW_TENDER', 'DELETE_TENDER', 'ASSOCIATE')" />
+		<intercept-url pattern="/noticesList" access="hasAnyRole('CREATE_NOTICES', 'VIEW_NOTICES', 'UPDATE_NOTICES', 'DELETE_NOTICES', 'ASSOCIATE')" />
+		<intercept-url pattern="/userList" access="hasAnyRole('CREATE_USER', 'VIEW_USER', 'UPDATE_USER', 'DELETE_USER', 'CHANGE_PASSWORD', 'ASSOCIATE')" />
+		<intercept-url pattern="/listOfRoles" access="hasAnyRole('ADD_ROLE', 'UPDATE_ROLE', 'DELETE_ROLE', 'ASSOCIATE')" />
+		<intercept-url pattern="/adminDashboard" access="hasAnyRole('ASSOCIATE')" />
+		<intercept-url pattern="/financialYearDashboard" access="hasAnyRole('ASSOCIATE')" />
+		<intercept-url pattern="/adminTenderList" access="hasAnyRole('ASSOCIATE')" />
+		<intercept-url pattern="/adminNoticesList" access="hasAnyRole('ASSOCIATE')" />
+		<intercept-url pattern="/ordersList" access="hasAnyRole('CREATE_ORDERS', 'VIEW_ORDERS' , 'UPDATE_ORDERS' , 'DELETE_ORDERS' ,'ASSOCIATE')" />
+		<intercept-url pattern="/adminOrdersList" access="hasAnyRole('ASSOCIATE')" />
+		<intercept-url pattern="/adminOrdersList" access="hasAnyRole('ASSOCIATE')" />
+		<intercept-url pattern="/adminDownloadList" access="hasAnyRole('ASSOCIATE')" />
+		<intercept-url pattern="/complaintDashboard" access="hasAnyRole('ASSOCIATE')" />
+		<intercept-url pattern="/feedbackDashboard" access="hasAnyRole('ASSOCIATE')" />
+		<intercept-url pattern="/departmentList" access="hasAnyRole('ASSOCIATE')" />
+		<intercept-url pattern="/tendorDepartmentList" access="hasAnyRole('ASSOCIATE')" />
+		<intercept-url pattern="/rightDashboard" access="hasAnyRole('ASSOCIATE')" />
+		<intercept-url pattern="/userPermission" access="hasAnyRole('ASSOCIATE')" />
+		<intercept-url pattern="/userPermissionsList" access="hasAnyRole('ASSOCIATE')" />
+		<intercept-url pattern="/downloadList" access="hasAnyRole('ASSOCIATE')" /> -->
+		
+		 <!--Captcha Filtering-->
+    <custom-filter ref="captchaCaptureFilter" before="FIRST"/>
+      <custom-filter ref="captchaVerifierFilter" before="FORM_LOGIN_FILTER"/>  
+		
+		 <form-login login-page="/index" 
+			 authentication-failure-url="/login?error"			 		
+                     username-parameter="username"
+                     password-parameter="password" 
+                     />
+         <logout logout-success-url="/login?logout" delete-cookies="JSESSIONID" />            
+       	<access-denied-handler error-page="/Access_Denied" /> 
+       	 
+       	 <session-management invalid-session-url="/login?logout"/>      	 
+       	
+       <!--Login Attepts Filtering-->
+       <custom-filter ref="loginAtteptFilter" after="FORM_LOGIN_FILTER"/>  
+    <anonymous />
+       	 
+       	<!-- <session-management invalid-session-url="/login?error">
+		    <concurrency-control max-sessions="1" expired-url="/login?error" />
+		</session-management>
+		 -->
+		<!-- <session-management invalid-session-url="/?timeout=true">
+		    <concurrency-control max-sessions="1" expired-url="/Timeout?timeout=true" />
+		</session-management> -->
+		
+		  <!-- <session-management>
+		    <concurrency-control
+		       max-sessions="1"
+		       expired-url="/login?error" />
+		  </session-management> -->
+		<!-- <session-config>
+			<session-timeout>15</session-timeout>
+		    <tracking-mode>COOKIE</tracking-mode>
+		</session-config> -->
+		
+
+		<!-- <session-management session-authentication-error-url="/login?error">
+			<concurrency-control max-sessions="1" session-registry-ref="sessionRegistry"  expired-url="/login?errorMessage" />
+		</session-management> -->
+		
+		<!-- enable remember me -->
+    <!-- <remember-me  token-validity-seconds="1209600" remember-me-parameter="remember-me"  data-source-ref="dataSource" /> -->
+	</http>
+
+<!-- For capturing CAPTCHA fields -->
+<beans:bean id="captchaCaptureFilter" class="com.cmsManagement.util.CaptchaCaptureFilter" />
+ 
+<!-- For verifying CAPTCHA fields -->
+<!-- Private key is assigned by the Captcha service -->
+   <beans:bean id="captchaVerifierFilter" class="com.cmsManagement.util.CaptchaVerifierFilter" 
+     p:failureUrl="/login?captchaError" 
+      p:captchaCaptureFilter-ref="captchaCaptureFilter"/> 
+        
+ <beans:bean id="loginAtteptFilter" class="com.cmsManagement.util.LoginAtteptFilter" 
+  p:failureUrl="/login?LoginAtteptError" 
+     p:captchaCaptureFilter-ref="captchaCaptureFilter"
+     p:captchaVerifierFilter-ref="captchaVerifierFilter" />
+     
+	<!-- <beans:bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl" /> -->
+
+
+	<!--   <beans:bean id="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />   -->
+	 <beans:bean id="SHAEncoder" class="com.cmsManagement.util.PasswordEncryptionSHA512" 
+	 p:captchaCaptureFilter-ref="captchaCaptureFilter"/>  
+
+
+	<authentication-manager>
+		<authentication-provider user-service-ref="customUserDetailsService">
+			 <!--  <password-encoder ref="bcryptEncoder" />  -->
+			    <password-encoder ref="SHAEncoder"/> 
+		</authentication-provider>
+	</authentication-manager>
+
+</beans:beans>

@@ -1,0 +1,74 @@
+delimiter $$
+CREATE TABLE `roles` (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `ROLE_TYPE` varchar(20) NOT NULL DEFAULT 'ATP',
+  `ROLE_CATEGORY` varchar(20) DEFAULT 'ASSOCIATE',
+  `ROLE_DESCRIPTION` varchar(100) DEFAULT NULL,
+  `CREATED_ON` datetime  DEFAULT NULL,
+  `CREATED_BY` varchar(150) DEFAULT NULL,
+  `MODIFIED_ON` datetime DEFAULT NULL,
+  `MODIFIED_BY` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB CHARACTER SET utf8 COLLATE utf8_unicode_ci$$
+
+
+delimiter $$
+CREATE TABLE `permissions` (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(255) DEFAULT NULL,
+  `CREATED_ON` datetime  DEFAULT NULL,
+  `CREATED_BY` varchar(150) DEFAULT NULL,
+  `MODIFIED_ON` datetime DEFAULT NULL,
+  `MODIFIED_BY` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `UK_PERMISSION_NAME` (`NAME`)
+) ENGINE=InnoDB CHARACTER SET utf8 COLLATE utf8_unicode_ci$$
+
+
+delimiter $$
+CREATE TABLE `modules` (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `MODULE_TYPE` varchar(255) DEFAULT NULL,
+  `MODULE_CATEGORY` varchar(100) DEFAULT NULL,
+  `CREATED_ON` datetime  DEFAULT NULL,
+  `CREATED_BY` varchar(150) DEFAULT NULL,
+  `MODIFIED_ON` datetime DEFAULT NULL,
+  `MODIFIED_BY` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `UK_MODULE_TYPE` (`MODULE_TYPE`)
+) ENGINE=InnoDB CHARACTER SET utf8 COLLATE utf8_unicode_ci$$
+
+create table tbl_tender (
+   id BIGINT NOT NULL AUTO_INCREMENT,
+   title VARCHAR(1000) DEFAULT NULL,
+   subTitle VARCHAR(1000) DEFAULT NULL,
+   openingDate VARCHAR(30) DEFAULT NULL,
+   closingDate VARCHAR(30) DEFAULT NULL,
+   description VARCHAR(1000) DEFAULT NULL,
+   publish_date VARCHAR(30) DEFAULT NULL,
+   publishStatus VARCHAR(30) DEFAULT NULL,
+   department_ID bigint(20) DEFAULT NULL,
+   tags VARCHAR(1000) DEFAULT NULL,
+   attachment_ID bigint(20) DEFAULT NULL,
+   state VARCHAR(30) DEFAULT NULL,
+  `CREATED_ON` date  DEFAULT NULL,
+  `CREATED_BY` varchar(15) DEFAULT NULL,
+  `MODIFIED_ON` date DEFAULT NULL,
+  `MODIFIED_BY` varchar(15) DEFAULT NULL,
+   PRIMARY KEY (id),
+   CONSTRAINT FK_ATTACHMENT FOREIGN KEY (attachment_ID) REFERENCES tbl_attachment (attachment_id),
+   CONSTRAINT FK_TENDER_DEPT FOREIGN KEY (department_ID) REFERENCES tender_department (id)
+);
+
+create table tender_department (
+   id BIGINT NOT NULL AUTO_INCREMENT,
+   dept_name VARCHAR(MAX) DEFAULT NULL,
+   dept_type VARCHAR(MAX) DEFAULT NULL,
+   state VARCHAR(30) DEFAULT NULL,
+  `CREATED_ON` datetime  DEFAULT NULL,
+  `CREATED_BY` varchar(15) DEFAULT NULL,
+  `MODIFIED_ON` datetime DEFAULT NULL,
+  `MODIFIED_BY` varchar(15) DEFAULT NULL,
+   PRIMARY KEY (id)
+);
+

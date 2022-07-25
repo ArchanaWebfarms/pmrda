@@ -1,0 +1,1 @@
+function carousela(){for(var t=document.getElementsByClassName("mySlides"),n=0;n<t.length;n++)t[n].style.display="none";myIndex++;myIndex>t.length&&(myIndex=1);t[myIndex-1].style.display="block";setTimeout(carousela,3e3)}var myIndex=0;carousela()

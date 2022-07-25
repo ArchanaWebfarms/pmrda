@@ -1,0 +1,53 @@
+<script>
+	$(document).ready(function(){
+   var CateID = $("#userIDc").val();
+   alert(CateID);
+   
+   
+   
+   
+   
+   $.ajax({
+		url:"getSubCategoryBycateID?CateID="+CateID,
+	
+		success:function(reportlist){
+			
+			alert(reportlist);
+
+			var t=reportlist;
+if(reportlist=="")
+	 {
+	 document.getElementById("projectsubcategory").style.display = "none";
+	 }
+else
+	 {
+	 $("#subcategoryselectlist").html("<option value='0' >Select SubCategory</option>")
+    var options = t.map(function(val, ind){
+   	 return $("<option></option>").val(val.project_subCate).html(val.subcate_name);
+   	});
+   	$('#subcategoryselectlist').append(options);
+   	document.getElementById("projectsubcategory").style.display = "";
+	 }
+           
+		   },
+		error:function(){
+			alert("error");
+		}
+	}); 
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+    });
+
+</script>

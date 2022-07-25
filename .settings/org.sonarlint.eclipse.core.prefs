@@ -1,0 +1,4 @@
+autoEnabled=true
+eclipse.preferences.version=1
+extraProperties=
+fileExclusions=FILE\:src/main/java/com/cmsManagement/controller/AdminController.java\r\nFILE\:src/main/java/com/cmsManagement/controller/NoticesController.java\r\nFILE\:src/main/java/com/cmsManagement/controller/TenderController.java
