@@ -560,10 +560,13 @@ var html = '<br><div id="a'+i+'"><div class="row" >'+
  function chkEnglishFile(j) {
 	 var fileName = document.querySelector('#english'+j).value;
    var extension = fileName.split('.').pop();
-    
-   if(extension=="pdf"){
+
+   
+   console.log(extension);
+   
+   if(extension=="pdf" || extension=="docs" || extension=="doc" ||  extension=="jpg" || extension=="png" || extension=="jpeg"){
 	  }else{	  	
-  	 alert("Only pdf file is allowed.");
+  	 alert("Only Pdf, Images and Microsoft word  file is allowed.");
   	 $("#english"+j).val("");
    }
 	  
@@ -574,10 +577,11 @@ var html = '<br><div id="a'+i+'"><div class="row" >'+
  function chkMarathiFile(j) {
 	 var fileName = document.querySelector('#marathi'+j).value;
 	   var extension = fileName.split('.').pop();
+	   console.log(extension);
 	    
-	   if(extension=="pdf"){
+	   if(extension=="pdf" || extension=="docs" || extension=="doc" ||  extension=="jpg" || extension=="png" || extension=="jpeg"){
 		  }else{	  	
-	  	 alert("Only pdf file is allowed.");
+	  	 alert("Only Pdf, Images and Microsoft word file is allowed.");
 	  	 $("#marathi"+j).val("");
 	   }
 }

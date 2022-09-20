@@ -17,6 +17,11 @@
 			background:white;
 		}
 		</style>
+		<style>
+       #password{
+           -webkit-text-security:disc;
+       }
+   </style>
 	</head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
@@ -59,7 +64,7 @@ $(document).ready(function(){
 						<%-- <c:url var="loginUrl" value="/login" />
 						<form action="${loginUrl}" method="post" class="form-horizontal"> --%>
 						<%-- <form  action="<c:url value='/j_spring_security_check' />" method='POST' class="form-horizontal"> --%>
-						<form  action="j_spring_security_check?${_csrf.parameterName}=${_csrf.token}" method='POST' class="form-horizontal">  <!--  method='POST' -->
+						<form  action="j_spring_security_check?${_csrf.parameterName}=${_csrf.token}" method='POST' class="form-horizontal" autocomplete="off">  <!--  method='POST' -->
 							<c:choose>
 							<c:when test="${param.error != null}">
 								<div class="alert alert-danger">
@@ -100,7 +105,7 @@ $(document).ready(function(){
 							</div>
 							<div class="input-group input-sm">
 								<label class="input-group-addon" for="password"><i class="fa fa-lock"></i></label> 
-								<input type="password" class="form-control" id="password" name="password" placeholder="Enter Password"  autocomplete="off" required>
+								<input type="text" class="form-control" id="password" name="password" placeholder="Enter Password"  autocomplete="off" required>
 							</div>
 							
 							<!-- <div class="row">

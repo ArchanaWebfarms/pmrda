@@ -79,7 +79,7 @@
 		        <!-- /.col -->
 		        <div class="col-sm-6 invoice-col">
 		          <br>
-		          <h4><b>User ID : </b><c:out value="${userDto.user_id}"></c:out></h4>     
+		         <%--  <h4><b>User ID : </b><c:out value="${userDto.user_id}"></c:out></h4>  --%>    
 		           <h4><b>Username : </b><c:out value="${userDto.username}"></c:out></h4>
 		          <h4><b>Full Name : </b><c:out value="${userDto.firstName}"></c:out>&nbsp;<c:out value="${userDto.lastName}"></c:out></h4> 
 		          <h4><b>Email : </b><c:out value="${userDto.email}"></c:out></h4>        

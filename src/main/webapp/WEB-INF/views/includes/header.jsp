@@ -130,7 +130,7 @@ $(function () {
                  <input type="text"  id="nameTwo" style="background-color:#3C8DBC; font-size:16px; border-style:none; width:inherit; text-align:center;"  readonly="readonly">
                 </p>
                 <div class="pull-right" style="width:30%; display:grid; margin-top:10px;">
-                 <a href="javascript:viewUser(<%=session.getAttribute("loginID")  %>)" class="btn btn-default btn-flat" style="margin:8px 5px;">Profile</a>
+                 <a href="javascript:viewUser()" class="btn btn-default btn-flat" style="margin:8px 5px;">Profile</a>
                   <a href="logout" class="btn btn-default btn-flat" style="margin:8px 5px;">Sign out</a>
                 </div>
               </li>
@@ -444,11 +444,11 @@ $(document).ready(function(){
 
 </script>
 <form:form  action="viewUser" id="viewUserform" oncontextmenu="return false" onkeydown="return false;" onmousedown="return false;" >  	
-  <input type="hidden" id="viewUserid" name="userId" />  
+  <input type="hidden" id="viewUserid" name="userId" value="<%=session.getAttribute("loginID")  %>"/>  
   </form:form>
 <script type="text/javascript">
-function viewUser(id){
-	$("#viewUserid").val(id);
+function viewUser(){
+	//$("#viewUserid").val(id);
 	$("#viewUserform").submit();
 }
 
