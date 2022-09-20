@@ -160,7 +160,7 @@ color:red;
 					<div class="col-md-7">	
 					<div class="input-group">
 					  <span class="input-group-addon"><i class="fa fa-edit"></i></span>			
-						<form:textarea type="text" path="description_h" id="description_h" class="form-control" />
+						<form:textarea type="text" path="description_h" id="description_h" class="form-control"  />
 					</div>	
 					</div>					
 			</div>
@@ -218,7 +218,8 @@ color:red;
 					 <div class="input-group">
 					  <span class="input-group-addon"><i class="fa fa-file"></i></span>
 					  <%-- 	<input type="file" value="${tendors.attachment.attachmnt_name}" name="file" id="file" class="form-control"/> --%>				  
-						<input type="file" name="english" id="english1" class="form-control" onchange="chkEnglishFile(1)" />
+						<input type="file" name="english" id="english1" class="form-control" onchange="chkEnglishFile(1)" accept=
+"application/msword, application/pdf, image/*,.pdf,.doc, .docx" />
 					 </div>	
 				</div>
 			</div>
@@ -246,7 +247,8 @@ color:red;
 					 <div class="input-group">
 					  <span class="input-group-addon"><i class="fa fa-file"></i></span>
 					  <%-- 	<input type="file" value="${tendors.attachment.attachmnt_name}" name="file" id="file" class="form-control"/> --%>				  
-						<input type="file" name="marathi" id="marathi1" class="form-control" onchange="chkMarathiFile(1)" />
+						<input type="file" name="marathi" id="marathi1" class="form-control" onchange="chkMarathiFile(1)"   accept=
+"application/msword, application/pdf, image/*, .pdf,.doc, .docx" />
 					 </div>	
 				</div>
 			</div>
@@ -435,6 +437,22 @@ $( document ).ready(function() {
 		
 		
 		}
+		
+		 $("#description_h").focusout( function(e) {
+	            var reg =/<(.|\n)*?>/g; 
+	            if (reg.test($('#description_h').val()) == true) {
+	                alert('HTML Tag are not allowed');
+	            }
+	            e.preventDefault();
+	        });
+		 
+		 $("#description").focusout( function(e) {
+	            var reg =/<(.|\n)*?>/g; 
+	            if (reg.test($('#description').val()) == true) {
+	                alert('HTML Tag are not allowed');
+	            }
+	            e.preventDefault();
+	        });
 	    
 	}); 
 	
