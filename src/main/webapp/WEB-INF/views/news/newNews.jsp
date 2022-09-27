@@ -219,7 +219,7 @@ color:red;
 					  <span class="input-group-addon"><i class="fa fa-file"></i></span>
 					  <%-- 	<input type="file" value="${tendors.attachment.attachmnt_name}" name="file" id="file" class="form-control"/> --%>				  
 						<input type="file" name="english" id="english1" class="form-control" onchange="chkEnglishFile(1)" accept=
-"application/msword, application/pdf, image/*,.pdf,.doc, .docx" />
+"application/msword, application/pdf,.png,.jpg,.pdf,.doc, .docx" />
 					 </div>	
 				</div>
 			</div>
@@ -248,7 +248,7 @@ color:red;
 					  <span class="input-group-addon"><i class="fa fa-file"></i></span>
 					  <%-- 	<input type="file" value="${tendors.attachment.attachmnt_name}" name="file" id="file" class="form-control"/> --%>				  
 						<input type="file" name="marathi" id="marathi1" class="form-control" onchange="chkMarathiFile(1)"   accept=
-"application/msword, application/pdf, image/*, .pdf,.doc, .docx" />
+"application/msword, application/pdf, .png,.jpg, .pdf,.doc, .docx" />
 					 </div>	
 				</div>
 			</div>
@@ -442,6 +442,7 @@ $( document ).ready(function() {
 	            var reg =/<(.|\n)*?>/g; 
 	            if (reg.test($('#description_h').val()) == true) {
 	                alert('HTML Tag are not allowed');
+	                $("#description_h").val();
 	            }
 	            e.preventDefault();
 	        });
@@ -450,6 +451,7 @@ $( document ).ready(function() {
 	            var reg =/<(.|\n)*?>/g; 
 	            if (reg.test($('#description').val()) == true) {
 	                alert('HTML Tag are not allowed');
+	                $("#description").val();
 	            }
 	            e.preventDefault();
 	        });
