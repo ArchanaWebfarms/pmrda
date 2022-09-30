@@ -442,7 +442,7 @@ $( document ).ready(function() {
 	            var reg =/<(.|\n)*?>/g; 
 	            if (reg.test($('#description_h').val()) == true) {
 	                alert('HTML Tag are not allowed');
-	                $("#description_h").val();
+	                $("#description_h").val("");
 	            }
 	            e.preventDefault();
 	        });
@@ -451,7 +451,7 @@ $( document ).ready(function() {
 	            var reg =/<(.|\n)*?>/g; 
 	            if (reg.test($('#description').val()) == true) {
 	                alert('HTML Tag are not allowed');
-	                $("#description").val();
+	                $("#description").val("");
 	            }
 	            e.preventDefault();
 	        });
