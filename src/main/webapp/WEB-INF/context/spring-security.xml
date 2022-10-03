@@ -11,15 +11,14 @@
   			   <headers >
 	         <frame-options policy="DENY" /> 
 	         <cache-control />
-       		 <content-type-options/>
-        	<hsts />
+       		 <content-type-options/>        	
         	<xss-protection /> 
         	<header name="X-Content-Security-Policy" value="default-src 'self'"/>
           <header name="X-WebKit-CSP" value="default-src 'self'"/>
           <hsts
 			include-subdomains="true"
 			max-age-seconds="31536000" />
-			<header name="Referrer-Policy" value="same-origin"/> 
+		  <header name="Referrer-Policy" value="same-origin"/> 
 			
 	    </headers>
   		<csrf/>
