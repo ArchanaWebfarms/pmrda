@@ -37,7 +37,7 @@ public class LoginAtteptFilter extends OncePerRequestFilter {
 					String username=captchaCaptureFilter.getUsernameResponse();
 
 					if(username!=null){					
-						User users = userService.findByUsername(username);System.out.println("users :"+users.toString());
+						User users = userService.findByUsername(username);
 
 						if(users.getUser_id()>0){
 							if(users.isAccountNonLocked()){
@@ -70,7 +70,7 @@ public class LoginAtteptFilter extends OncePerRequestFilter {
 						}
 						resetUsernameField();
 					}
-				} catch (Exception e) {}
+				} catch (Exception e) {e.printStackTrace();}
 			}else{
 				req.getSession().setAttribute("LoginAtteptError", "Captcha Verification Failed.");
 

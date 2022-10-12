@@ -89,14 +89,14 @@
         <filter-name>CheckCaptchaFilter</filter-name>
         <url-pattern>/j_spring_security_check</url-pattern>
     </filter-mapping> -->
-  <session-config>
+<!--   <session-config>
     <session-timeout>30</session-timeout>
    
      <cookie-config>
         <http-only>true</http-only>
         <secure>true</secure>
-    </cookie-config>
-  </session-config>
+    </cookie-config> 
+  </session-config>-->
   <error-page>
     <location>/errors</location>
   </error-page>

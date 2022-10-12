@@ -24,8 +24,15 @@ public class CaptchaCaptureFilter extends OncePerRequestFilter {
 			request = req;        
 			userCaptchaResponse = req.getParameter("captchaCode");
 			usernameResponse=req.getParameter("username");
-			passwordResponse=req.getParameter("password");			System.out.println("passwordResponse :"+passwordResponse);
+			passwordResponse=req.getParameter("password");			
 		}
+
+
+		/*
+		 * try { if(!request.getServletPath().contains("/botdetectcaptcha")) {
+		 * res.setHeader("Set-Cookie", "HttpOnly; SameSite=Lax; Secure"); } } catch
+		 * (Exception e) {e.printStackTrace(); }
+		 */
 
 		// Proceed with the remaining filters
 		chain.doFilter(req, res);
