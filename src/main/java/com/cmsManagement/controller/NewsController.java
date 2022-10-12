@@ -203,6 +203,9 @@ public class NewsController extends AbstractControllerHelper{
 				news=PreventionFromXSSAttack.preventNews(news);
 				
 				news.setPublish_date(MethodsHelper.convertDate(news.getPublish_date()));
+				
+				news.setDescription(news.getDescription().replaceAll("<[^>]*>", ""));
+				news.setDescription_h(news.getDescription_h().replaceAll("<[^>]*>", ""));)
 
 				String title[]=req.getParameterValues("atitle");
 				String mtitle[]=req.getParameterValues("mtitle");
@@ -386,6 +389,8 @@ public class NewsController extends AbstractControllerHelper{
 							try {
 								news =newsservice.ViewNews(id);
 								news.setPublish_date(MethodsHelper.convertDate1(news.getPublish_date()));
+								news.setDescription(news.getDescription().replaceAll("<[^>]*>", ""));
+								news.setDescription_h(news.getDescription_h().replaceAll("<[^>]*>", ""));
 								List<Attachment> attachmentlist = attachmentservice.getAttachmentByModuleID(news.getNewsid(),"NEWS");
 								EditNewsModel.addObject("attachmentlist", attachmentlist);
 								for(int x=0;x<attachmentlist.size();x++)
