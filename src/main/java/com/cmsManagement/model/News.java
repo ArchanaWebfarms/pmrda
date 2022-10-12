@@ -26,14 +26,14 @@ public class News {
 	private String url;
 	private String type;
 	private String subtitle;
-	 @SafeHtml(message = "*Invalid Input")
+	@SafeHtml(message = "*Invalid Input")
 	private String description;
-	 @SafeHtml(message = "*Invalid Input")
+	@SafeHtml(message = "*Invalid Input")
 	private String description_h;
 	private String delete_approval_status;
 	private int delete_approved_by;
 	private String delete_approval_date;
-	 @SafeHtml(message = "*Invalid Input")
+	@SafeHtml(message = "*Invalid Input")
 	private String delete_approval_comment;
 
 	@NotEmpty(message = "**Required")  @SafeHtml(message = "*Invalid Input")
