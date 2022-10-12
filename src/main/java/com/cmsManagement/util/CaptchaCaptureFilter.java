@@ -28,11 +28,13 @@ public class CaptchaCaptureFilter extends OncePerRequestFilter {
 		}
 
 
-		/*
-		 * try { if(!request.getServletPath().contains("/botdetectcaptcha")) {
-		 * res.setHeader("Set-Cookie", "HttpOnly; SameSite=Lax; Secure"); } } catch
-		 * (Exception e) {e.printStackTrace(); }
-		 */
+
+		try { 
+			if(!request.getServletPath().contains("/botdetectcaptcha")) {
+				res.setHeader("Set-Cookie", "HttpOnly; SameSite=Lax; Secure");
+			}
+		} catch(Exception e) {e.printStackTrace(); }
+
 
 		// Proceed with the remaining filters
 		chain.doFilter(req, res);
