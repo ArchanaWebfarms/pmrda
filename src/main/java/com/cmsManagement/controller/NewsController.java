@@ -205,7 +205,7 @@ public class NewsController extends AbstractControllerHelper{
 				news.setPublish_date(MethodsHelper.convertDate(news.getPublish_date()));
 				
 				news.setDescription(news.getDescription().replaceAll("<[^>]*>", ""));
-				news.setDescription_h(news.getDescription_h().replaceAll("<[^>]*>", ""));)
+				news.setDescription_h(news.getDescription_h().replaceAll("<[^>]*>", ""));
 
 				String title[]=req.getParameterValues("atitle");
 				String mtitle[]=req.getParameterValues("mtitle");

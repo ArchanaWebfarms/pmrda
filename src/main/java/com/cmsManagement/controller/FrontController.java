@@ -21,8 +21,12 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.log4j.Logger;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -65,23 +69,28 @@ import com.cmsManagement.util.ValidationResponse;
 
 @Controller
 public class FrontController extends AbstractControllerHelper {
+	private static final Logger logger = Logger.getLogger(FrontController.class);
 
 	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 	LocalDateTime now = LocalDateTime.now();
 
 	/**
-	 * 
+	 * 	
 	 * @throws ParseException
 	 * @Front Controller Index page
 	 *
 	 */
 	String emailSubject;
 
-	@RequestMapping(value = "/index",method=RequestMethod.GET)
-	public String index(HttpServletRequest request, Model indexModel,
+	@RequestMapping(value = "/index",method= {RequestMethod.GET,RequestMethod.POST})
+	public String index(HttpServletRequest request,HttpServletResponse response, Model indexModel,
 			HttpSession session) throws ParseException {
 
 		try {
+			
+			if(logger.isDebugEnabled()){
+				logger.debug("pmrda logs is executed!");
+			}
 			/************* getting current date and time *******************/
 			session.setAttribute("currdatetime", MethodsHelper
 					.convertDateAndTime1(MethodsHelper.getCurrentDateAndTime()));

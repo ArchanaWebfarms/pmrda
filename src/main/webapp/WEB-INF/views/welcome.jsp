@@ -8,7 +8,7 @@
 	<link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
 </head>
 <body>
-	<a href="<c:url value="/logout" />">Logout</a>
+	<a href="<c:url value="/index" />">Logout</a>
 	<div class="success">
 		Greeting : ${greeting}
 		This is a welcome page.

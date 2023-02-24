@@ -58,10 +58,12 @@
                      username-parameter="username"
                      password-parameter="password" 
                      />
-         <logout logout-success-url="/login?logout" delete-cookies="JSESSIONID" />            
+       <!--   <logout logout-success-url="/login?logout" delete-cookies="JSESSIONID" />       -->     
+         <logout logout-success-url="/logout" delete-cookies="JSESSIONID" />       
        	<access-denied-handler error-page="/Access_Denied" /> 
        	 
-       	 <session-management invalid-session-url="/login?logout"/>      	 
+       <!-- 	 <session-management invalid-session-url="/login?logout"/>   --> 
+       	 <session-management invalid-session-url="/index"/>     	 
        	
        <!--Login Attepts Filtering-->
        <custom-filter ref="loginAtteptFilter" after="FORM_LOGIN_FILTER"/>  

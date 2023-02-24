@@ -466,7 +466,8 @@ public class UserController extends AbstractControllerHelper{
 			if(action.equals("FirstLogedIn"))
 			{
 				boolean result= userService.updatePassword(userId, newPassword);
-				model.setViewName("redirect:login?logout");
+				//model.setViewName("redirect:login?logout");
+				model.setViewName("redirect:logout");
 			}
 			else
 			{

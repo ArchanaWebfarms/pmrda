@@ -22,7 +22,7 @@
 	<br/>
 	<a href="<c:url value="/" />">Go to home</a>  
 	<sec:authorize access="hasRole('USER') or hasRole('ADMIN') or hasRole('DBA')">
-           OR  <a href="<c:url value="/logout" />">Logout</a>
+           OR  <a href="<c:url value="/index" />">Logout</a>
     </sec:authorize>
 	
 </body>

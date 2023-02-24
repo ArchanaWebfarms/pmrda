@@ -62,7 +62,7 @@ public class LoginController extends AbstractControllerHelper{
 				url="accessDenied";
 			}
 		} catch (Exception e1) {			
-			url="redirect:/logout";
+			url="redirect:/index";
 		}
 		return url;
 	}
@@ -83,7 +83,7 @@ public class LoginController extends AbstractControllerHelper{
 	}
 
 
-	@RequestMapping(value="/logout", method = RequestMethod.GET)
+	@RequestMapping(value="/logout", method = {RequestMethod.GET, RequestMethod.POST})
 	public String logoutPage (HttpServletRequest request, HttpServletResponse response,ModelAndView model,HttpSession session) {
 		//	LoginInfo info = new LoginInfo();
 		//info.setUserId(LoginController.getCurrentLoggedInUser().getUser().getUser_id());
@@ -100,6 +100,7 @@ public class LoginController extends AbstractControllerHelper{
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
 		return "redirect:/login?logout";
+		
 
 		//model.setViewName("masters/login");
 		//return model;

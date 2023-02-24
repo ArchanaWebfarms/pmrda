@@ -11,8 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.validator.constraints.br.CNPJ;
-import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,14 +32,14 @@ import com.cmsManagement.model.Project;
 import com.cmsManagement.model.Tendors;
 import com.cmsManagement.model.User;
 import com.cmsManagement.util.Constants;
-import com.cmsManagement.util.MethodsHelper;
-import com.cmsManagement.util.PasswordEncryptionSHA512;
 import com.cmsManagement.util.SpecialCharacter;
-import com.mysql.cj.protocol.x.Notice;
 
 
 @Controller
 public class MasterController extends AbstractControllerHelper{
+	
+	private static final Logger logger = Logger.getLogger(MasterController.class);
+
 
 	Date objDate = new Date();
 	// Display the Date & Time using toString()
@@ -48,6 +47,11 @@ public class MasterController extends AbstractControllerHelper{
 	@RequestMapping(value ="/", method = RequestMethod.GET)
 	public ModelAndView dashboard(HttpServletRequest request,ModelAndView dashboardModel,HttpSession session) {
 		try {
+			
+			if(logger.isDebugEnabled()){
+				logger.debug("pmrda logs is executed!");
+			}
+			
 			LoginInfo info = new LoginInfo();
 			info.setUserId(LoginController.getCurrentLoggedInUser().getUser().getUser_id());
 			info.setUsername(LoginController.getCurrentLoggedInUser().getUser().getUsername());	
@@ -55,7 +59,8 @@ public class MasterController extends AbstractControllerHelper{
 			userService.resetFailedLoginAttept(LoginController.getCurrentLoggedInUser().getUser());
 			
 			info.setTime(objDate.toString());
-			logindaoservice.SaveUserIdAndTimeAfterLogin(info);			
+			logindaoservice.SaveUserIdAndTimeAfterLogin(info);	
+			logger.info("Login details saved");
 
 			if(LoginController.getCurrentLoggedInUser()!=null && LoginController.getCurrentLoggedInUser().getUser().getPass_Status().equals(Constants.TEMPORARY)){
 				dashboardModel.setViewName("user/changePassword");	 
@@ -158,6 +163,7 @@ public class MasterController extends AbstractControllerHelper{
 				session.setAttribute("userMannual", "NoMannual");
 			}
 		} catch (Exception e) {
+			logger.info(e);
 			dashboardModel.setViewName("redirect:/index");
 			e.printStackTrace();
 		}
