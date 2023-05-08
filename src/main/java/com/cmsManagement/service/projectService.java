@@ -31,6 +31,7 @@ public interface projectService {
 	public void deleteProjectStatus(String approvedStatus, String comment,
 			int id);
 	public List<Project> getAllAdminActiveProject();
+	public List<Project> getProjectListByApprovedStatusAndType(String type);
 	
 
 

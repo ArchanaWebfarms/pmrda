@@ -168,7 +168,7 @@
 	            <tr>
 	             		<td>${status.index + 1}</td>
 						<td>${attachmentlist.attachmnt_name}</td> 
-						<td>${attachmentlist.module_type}</td>
+						<td>${attachmentlist.title}</td>
 						<td><input type="button" value="Download" class="btn btn-primary btn-flat margin" onclick="return attachmentDownload(${attachmentlist.attachmentID})"/></td>		
 	            </tr>  
 	            </c:forEach> 

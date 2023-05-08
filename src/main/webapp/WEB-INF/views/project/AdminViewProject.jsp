@@ -55,7 +55,7 @@
       <ol class="breadcrumb">
        <li><a href="home"><i class="fa fa-dashboard"></i> <b>Home</b></a></li>
         <li><a href="adminProjectDashboard">Admin Project Dashboard</a></li>
-        <li><a href="adminTenderList">Admin Project List</a></li>
+        <li><a href="adminProjectList">Admin Project List</a></li>
         <li class="active">Change Status</li>
        </ol>
     </section>
@@ -166,7 +166,7 @@
 	            <tr>
 	             		<td>${status.index + 1}</td>
 						<td>${attachmentlist.attachmnt_name}</td> 
-						<td>${attachmentlist.module_type}</td>
+						<td>${attachmentlist.title}</td>
 						<td><input type="button" value="Download" class="btn btn-primary btn-flat margin" onclick="return attachmentDownload(${attachmentlist.attachmentID})"/></td>								
 	            </tr>  
 	            </c:forEach> 

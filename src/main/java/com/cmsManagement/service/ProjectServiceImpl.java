@@ -161,6 +161,11 @@ public class ProjectServiceImpl implements projectService {
 	public List<Project> getAllAdminActiveProject() {
 		return projectDao.getAllAdminActiveProject();
 	}
+
+	@Override
+	public List<Project> getProjectListByApprovedStatusAndType(String type) {
+		return projectDao.getProjectListByApprovedStatusAndType(type);
+	}
 	
 	
 

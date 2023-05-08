@@ -128,7 +128,7 @@ $(function() {
 function selectStatus(){
 	var issueHTML = '<div class="box"><div class="box"><div class="box-header"><h3 class="box-title">Project Data Table</h3></div>'+
 	'<div class="box-body"><table id="example1" class="table table-bordered table-striped">'+ 
-	'<thead><tr><th>S.N.</th><th>Title in English</th><th>Title in Marathi</th>'+
+	'<thead><tr><th>S.N.</th><th>Category</th><th>Title in English</th><th>Title in Marathi</th>'+
 	'<th>Status</th><th id="tableAction">Action</th></tr>'+
 	'</thead>'+
 	'<tbody>';	
@@ -147,6 +147,7 @@ function selectStatus(){
 	    		if(status=='Approved'){
 	    			var j = i+1;
 					issueHTML+='<tr> <td>'+j+'</td>'+
+					'<td>'+response[i].type+'</td>'+
 					'<td>'+response[i].title+'</td>'+	
 					'<td>'+response[i].title_h+'</td>'+
 					/* '<td>'+response[i].projectCordinator+'</td>'+ */
@@ -159,6 +160,7 @@ function selectStatus(){
 				{
 	    			var j = i+1;
 					issueHTML+='<tr> <td>'+j+'</td>'+
+					'<td>'+response[i].type+'</td>'+
 					'<td>'+response[i].title+'</td>'+
 					'<td>'+response[i].title_h+'</td>'+
 					/* '<td>'+response[i].projectCordinator+'</td>'+ */
@@ -170,6 +172,7 @@ function selectStatus(){
 			{
 				var j = i+1;
 				issueHTML+='<tr> <td>'+j+'</td>'+
+				'<td>'+response[i].type+'</td>'+
 				'<td>'+response[i].title+'</td>'+		
 				'<td>'+response[i].title_h+'</td>'+
 				/* '<td>'+response[i].projectCordinator+'</td>'+ */

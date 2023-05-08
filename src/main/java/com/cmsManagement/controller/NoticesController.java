@@ -318,7 +318,7 @@ if(date2.before(date1) || date1.equals(date2)) {
 	 * @return Notices by id to Show Notices Information
 	 * @throws ParseException 
 	 */
-	@RequestMapping(value = "/viewNotices",method=RequestMethod.POST)
+	@RequestMapping(value = "/viewNotices",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView viewNotices(HttpServletRequest request, ModelAndView viewNoticesModel,HttpSession session) throws ParseException {
 		try {
 			String login=(String) session.getAttribute("login");			
@@ -389,7 +389,7 @@ if(date2.before(date1) || date1.equals(date2)) {
 	 * @return
 	 * @throws ParseException  
 	 */
-	@RequestMapping(value = "/editNotices",method=RequestMethod.POST)
+	@RequestMapping(value = "/editNotices",method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView editNotices(HttpServletRequest request, HttpSession session, ModelAndView editNoticesModel) throws ParseException {
 		try {
 			String login=(String) session.getAttribute("login");			
@@ -565,7 +565,7 @@ if(date2.before(date1) || date1.equals(date2)) {
 	 * @return Notice by id to Show Notice Information and update status
 	 * @throws ParseException 
 	 */
-	@RequestMapping(value = "/adminNoticesView",method=RequestMethod.POST)
+	@RequestMapping(value = "/adminNoticesView",method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView adminTendorView(HttpServletRequest request, ModelAndView adminTendorViewModel,HttpSession session) throws ParseException {
 		try {
 			String login=(String) session.getAttribute("login");			
@@ -784,7 +784,7 @@ if(date2.before(date1) || date1.equals(date2)) {
 		return noticesList;
 	}
 
-	@RequestMapping(value = "/adminDeleteViewNotices",method=RequestMethod.POST)
+	@RequestMapping(value = "/adminDeleteViewNotices",method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView adminDeleteViewNews(ModelAndView model,HttpSession session,HttpServletRequest req) {
 		try {
 			String login=(String) session.getAttribute("login");			
@@ -868,7 +868,7 @@ if(date2.before(date1) || date1.equals(date2)) {
 		return model;
 	}
 
-	@RequestMapping(value = "/ViewDeactivatedNotices",method=RequestMethod.POST)
+	@RequestMapping(value = "/ViewDeactivatedNotices",method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView ViewDeactivatedOpening(ModelAndView model,HttpServletRequest req,HttpSession session) {
 		try{
 			String login=(String) session.getAttribute("login");	

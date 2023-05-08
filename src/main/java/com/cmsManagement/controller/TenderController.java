@@ -321,7 +321,7 @@ public class TenderController extends AbstractControllerHelper{
 	 * @return Tender by id to Show Tender Information
 	 * @throws ParseException 
 	 */
-	@RequestMapping(value = "/view_Tender",method=RequestMethod.POST)
+	@RequestMapping(value = "/view_Tender",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView viewTender(HttpServletRequest request, ModelAndView viewTenderModel,HttpSession session, SecurityContextHolder auth) throws ParseException {
 		try
 		{
@@ -381,7 +381,7 @@ public class TenderController extends AbstractControllerHelper{
 	 * @return
 	 * @throws ParseException 
 	 */
-	@RequestMapping(value = "/editTender",method=RequestMethod.POST)
+	@RequestMapping(value = "/editTender",method= {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView editUser(HttpServletRequest request, HttpSession session, ModelAndView editUserModel, SecurityContextHolder auth) throws ParseException {
 		try
 		{
@@ -685,7 +685,7 @@ public class TenderController extends AbstractControllerHelper{
 	}
 
 
-	@RequestMapping(value = "/adminDeleteViewTender",method=RequestMethod.POST)
+	@RequestMapping(value = "/adminDeleteViewTender",method={RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView adminDeleteViewNews(ModelAndView model,HttpSession session,HttpServletRequest req) {
 		try {
 			String login=(String) session.getAttribute("login");	
@@ -748,7 +748,7 @@ public class TenderController extends AbstractControllerHelper{
 		return model;
 	}
 
-	@RequestMapping(value = "/viewDeactivatedTender",method=RequestMethod.POST)
+	@RequestMapping(value = "/viewDeactivatedTender",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView ViewDeactivatedTender(ModelAndView model,HttpServletRequest req,HttpSession session) {
 		try {
 			String login=(String) session.getAttribute("login");	

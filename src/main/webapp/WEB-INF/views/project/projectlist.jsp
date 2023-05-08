@@ -79,6 +79,7 @@
                 <thead>
                 <tr>
                   <th>S.N.</th>
+                    <th>Category</th>
                   <th>Title in English</th>
                   <th>Title in Marathi</th>
                    <th>Status</th> 
@@ -93,6 +94,7 @@
 					<c:forEach var="projectlist" items="${projectList}" varStatus="status">
 							<tr>
 								<td>${status.index + 1}</td>
+								<td>${projectlist.type}</td>
 								<td>${projectlist.title}</td>
 								<td>${projectlist.title_h}</td>
 								 <td>${projectlist.approvedStatus}</td> 

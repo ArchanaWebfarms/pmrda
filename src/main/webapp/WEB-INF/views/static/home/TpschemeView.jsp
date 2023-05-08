@@ -17,7 +17,7 @@
   <meta name="viewport" content="width=device-width" />
       <meta name="description" content="Pune has come to be known one of the most advanced and industrialized cities of India "/>
       <link rel="icon" href="staticResources/images/PMRDALogo1.png" type="image/png" >
-        <title>.:: <spring:message code="project.h4.title" /> ::.</title>
+        <title>.:: <spring:message code="Header.Menu.TpScheme" /> ::.</title>
         
         <style>
         
@@ -64,27 +64,27 @@ h4{
                  <div class="col-sx-12 col-sm-12 col-md-2 left-side" style="padding-right: 25px;">
                   <div   class="b-l-m-container">
                      <ul>
-                     <li><a href="#"><spring:message code="project.h4.title" /></a></li>                     
+                     <li><a href="#"><spring:message code="Header.Menu.TpScheme" /></a></li>                     
                      <c:set value="${project.id}" var="id"></c:set>
-                     <c:forEach items="${projectList}" var="projectList">
+                     <c:forEach items="${tplist}" var="projectList">
                      <c:choose>
 						<c:when test="${localLang eq 'en_US'}">
 							 <c:choose>
                      			<c:when test="${projectList.id eq id}">
-                     				<li><a class="active" href="javascript:getProject(${projectList.id})">${projectList.title}</a></li>
+                     				<li><a class="active" href="javascript:getTpScheme(${projectList.id})">${projectList.title}</a></li>
                     			</c:when>
                      			<c:otherwise>
-                     				<li><a href="javascript:getProject(${projectList.id})">${projectList.title}</a></li>
+                     				<li><a href="javascript:getTpScheme(${projectList.id})">${projectList.title}</a></li>
                     			</c:otherwise>
                     		</c:choose>
 						</c:when>
 						<c:otherwise>
 							<c:choose>
                      			<c:when test="${projectList.id eq id}">
-                     				<li><a class="active" href="javascript:getProject(${projectList.id})">${projectList.title_h}</a></li>
+                     				<li><a class="active" href="javascript:getTpScheme(${projectList.id})">${projectList.title_h}</a></li>
                     			</c:when>
                      			<c:otherwise>
-                     				<li><a href="javascript:getProject(${projectList.id})">${projectList.title_h}</a></li>
+                     				<li><a href="javascript:getTpScheme(${projectList.id})">${projectList.title_h}</a></li>
                     			</c:otherwise>
                     		</c:choose>	
 						</c:otherwise>
@@ -251,13 +251,31 @@ h4{
                   </p>
                   </c:otherwise>
                   </c:choose>
-                  
+                  <c:choose>
+			<c:when test="${empty docs}">			
+			</c:when>	
+			<c:otherwise>
+                 <h4 style="color:#0086b2"><spring:message code="project.h4.docpro" /></h4>
+                 <table>
+                 <tr>
+                 <th>Sr. No.</th>
+                 <th>Document</th>
+                 </tr>
+                 <c:forEach var="docs" items="${docs}" varStatus="sr">
+                 <tr>
+                 <td>${sr.index+1 }</td>
+                 <td><a href="staticResources/Project/${docs.attachmnt_name}" target="_blank">${docs.attachmnt_name}</a></td>
+                 </tr>
+                 </c:forEach>   
+                 </table>               
+              </c:otherwise>
+              </c:choose> 
                   <c:choose>
 			<c:when test="${empty map.attachmnt_name}">			
 			</c:when>	
 			<c:otherwise>
                  <h4 style="color:#0086b2"><spring:message code="project.h4.map" /></h4>
-                  <img src="staticResources/Project/${map.attachmnt_name}" alt="Los Angeles" height="400px" width="700px">
+                  <img src="staticResources/Project/${map.attachmnt_name}" alt="Not Found" height="400px" width="700px">
               </c:otherwise>
               </c:choose>    
                   
@@ -267,7 +285,7 @@ h4{
 			<c:otherwise>
                  <h4 style="color:#0086b2"><spring:message code="project.h4.phopro" /></h4>
                  <c:forEach var="photo" items="${photo}">
-                 	<img src="staticResources/Project/${photo.attachmnt_name}" alt="Los Angeles" height="400px" width="700px"><br /><br />
+                 	<img src="staticResources/Project/${photo.attachmnt_name}" alt="Not Found" height="400px" width="700px"><br /><br />
                  </c:forEach>                  
               </c:otherwise>
               </c:choose> 
@@ -277,8 +295,8 @@ h4{
 			</c:when>	
 			<c:otherwise>
                  <h4 style="color:#0086b2"><spring:message code="project.h4.vdopro" /></h4>
-                <%--   <img src="staticResources/Project/${video.attachmnt_name}" alt="Los Angeles" height="400px" width="700px"> --%>
-            <video width="320" height="240" preload="auto" controls>
+                  <%-- <img src="staticResources/Project/${video.attachmnt_name}" alt="Los Angeles" height="400px" width="700px"> --%>
+                  <video width="320" height="240" preload="auto" controls>
   <source src="staticResources/Project/${video.attachmnt_name}" type="video/mp4">
   Your browser does not support the video tag.
 </video>
@@ -296,14 +314,14 @@ h4{
          </footer>
       </div>   
       
-      <form:form  action="getProjectById" id="projectform" oncontextmenu="return false" onkeydown="return false;" onmousedown="return false;" >  	
-  <input type="hidden" id="projectid" name="id" />  
-  </form:form> 
+    <form:form action="TpschemeView" id="tpform" oncontextmenu="return false" onkeydown="return false;" onmousedown="return false;" > <input type="hidden" id="tpid" name="id" /> </form:form>
+
   
 <script type="text/javascript">
-function getProject(id){
-	$("#projectid").val(id);
-	$("#projectform").submit();
+function getTpScheme(id){
+	 $("#tpid").val(id);
+	$("#tpform").submit();
+	 return true;
 }
 </script>
       

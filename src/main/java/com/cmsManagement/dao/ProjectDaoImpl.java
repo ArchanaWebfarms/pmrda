@@ -170,6 +170,16 @@ public class ProjectDaoImpl extends AbstractDao<Serializable, Project> implement
 			return  criteria.list();
 	}
 
+	@Override
+	public List<Project> getProjectListByApprovedStatusAndType(String type) {
+		Criteria criteria=getSession().createCriteria(Project.class)
+				.add(Restrictions.eq("approvedStatus", Constants.APPROVED_STATUS))
+		        .add(Restrictions.eq("status", Constants.ACTIVE_STATE))
+		 .add(Restrictions.eq("type", type));
+		        /*.addOrder(Order.desc("id"));	*/	
+		return criteria.list();
+	}
+
 	
 
 

@@ -24,9 +24,6 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.log4j.Logger;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -122,7 +119,11 @@ public class FrontController extends AbstractControllerHelper {
 
 			/************* Project List *******************/
 			session.setAttribute("projectList",
-					projectService.getProjectListByApprovedStatus());
+					projectService.getProjectListByApprovedStatusAndType("Project"));
+			
+			/************* Tp Scheme List *******************/
+			session.setAttribute("tpSchemeList",
+					projectService.getProjectListByApprovedStatusAndType("Tp Scheme"));
 
 			/************* Archived Tender *******************/
 			List<Tendors> tenderList = tenderService.getAllTendors();
@@ -944,7 +945,7 @@ public class FrontController extends AbstractControllerHelper {
 		return noticeModel;
 	}
 
-	@RequestMapping(value = "/getLeader",method=RequestMethod.POST)
+	@RequestMapping(value = "/getLeader",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView getLeader(ModelAndView noticeModel,
 			HttpServletRequest req, HttpSession session) {
 		int id = 0;
@@ -1993,6 +1994,65 @@ public class FrontController extends AbstractControllerHelper {
 		model.setViewName("static/home/sitemap");
 		return model;
 	}
+	@RequestMapping("TpschemeList")
+	public ModelAndView TpschemeList(ModelAndView model) {
+		List<Project> tpSchemeList = projectService.getProjectListByApprovedStatusAndType("Tp Scheme");
+		model.addObject("tpList", tpSchemeList);
+		model.setViewName("static/home/TpschemeList");
+		return model;
+	}
+	@RequestMapping(path = "TpschemeView", method= {RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView TpschemeView(ModelAndView projectmodel,
+			HttpServletRequest request, HttpSession session) {
+		int id = 0;
+		try {
+			id = Integer.parseInt(request.getParameter("id"));
+			session.setAttribute("tpID", id);
+		} catch (Exception e) {
+			id = (int) session.getAttribute("tpID");
+		} finally {
+			Project project = projectService.getProjectById(id);
+			List<Attachment> attachmentlist = attachmentservice
+					.getAttachmentByModuleID(project.getId(), "Project");
+			
+			if (project.getDescription().isEmpty()
+					&& project.getSpecification().isEmpty()
+					&& project.getProjectCordinator().isEmpty()
+					&& project.getProject_status().isEmpty()
+					&& project.getScope_of_work().isEmpty()
+					&& attachmentlist.isEmpty()) {
+				projectmodel.setViewName("redirect:/underMaintenance");
+			} else {
+				projectmodel.addObject("project", project);
+
+				List<Attachment> photo = new ArrayList<Attachment>();
+				List<Attachment> docs = new ArrayList<Attachment>();
+
+				for (Attachment a : attachmentlist) {
+					if (a.getTitle().equals("Map")) {
+						projectmodel.addObject("map", a);
+					}
+					if (a.getTitle().equals("Photo")) {
+						photo.add(a);
+					}
+					if (a.getTitle().equals("Video")) {
+						projectmodel.addObject("video", a);
+					}
+					if(a.getTitle().equals("Document")) {
+						docs.add(a);
+					}
+				}
+				projectmodel.addObject("photo", photo);
+				projectmodel.addObject("docs", docs);
+				List<Project> projectlist = projectService
+						.getProjectListByApprovedStatusAndType("Tp Scheme");
+				projectmodel.addObject("tplist", projectlist);
+
+				projectmodel.setViewName("static/home/TpschemeView");
+			}
+		}
+		return projectmodel;
+	}
 
 	@SuppressWarnings("deprecation")
 	@ResponseBody
@@ -2606,7 +2666,7 @@ public class FrontController extends AbstractControllerHelper {
 		return model;
 	}
 
-	@RequestMapping(value = "/getDepartmentById",method=RequestMethod.POST)
+	@RequestMapping(value = "/getDepartmentById",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView getDepartmentById(ModelAndView model,
 			HttpServletRequest req, HttpSession session) throws ParseException {
 		int id = 0;
@@ -2624,7 +2684,7 @@ public class FrontController extends AbstractControllerHelper {
 	}
 
 	// getProjectById
-	@RequestMapping(value = "/getProjectById",method=RequestMethod.POST)
+	@RequestMapping(value = "/getProjectById",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView getProjectById(ModelAndView projectmodel,
 			HttpServletRequest request, HttpSession session) {
 		int id = 0;
@@ -2666,7 +2726,7 @@ public class FrontController extends AbstractControllerHelper {
 				}
 				projectmodel.addObject("photo", photo);
 				List<Project> projectlist = projectService
-						.getProjectListByApprovedStatus();
+						.getProjectListByApprovedStatusAndType("Project");
 				projectmodel.addObject("projectlist", projectlist);
 
 				projectmodel.setViewName("static/home/LatestProject");

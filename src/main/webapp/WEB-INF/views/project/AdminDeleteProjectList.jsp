@@ -131,7 +131,7 @@ function selectStatus(){
 	
 		var issueHTML = '<div class="box"><div class="box"><div class="box-header"><h3 class="box-title">Project Data Table</h3></div>'+
 		'<div class="box-body"><table id="example1" class="table table-bordered table-striped">'+ 
-		'<thead><tr><th>S.N.</th><th>Title in English</th><th>Title in Marathi</th>'+
+		'<thead><tr><th>S.N.</th><th>Category</th><th>Title in English</th><th>Title in Marathi</th>'+
 		'<th id="tableAction">Action</th></tr>'+
 		'</thead>'+
 		'<tbody>';	
@@ -145,6 +145,7 @@ function selectStatus(){
 		    		if(response[i].delete_approval_status=='Deactivate'){
 		    			var j = i+1;
 						issueHTML+='<tr> <td>'+j+'</td>'+
+						'<td>'+response[i].type+'</td>'+
 						'<td>'+response[i].title+'</td>'+
 						'<td>'+response[i].title_h+'</td>'+	
 						'<td><input type="button" value="View" class="btn btn-primary btn-flat margin" onclick="return viewD('+response[i].id+')"/></td>';
@@ -155,6 +156,7 @@ function selectStatus(){
 					{
 		    			var j = i+1;
 						issueHTML+='<tr> <td>'+j+'</td>'+
+						'<td>'+response[i].type+'</td>'+
 						'<td>'+response[i].title+'</td>'+
 						'<td>'+response[i].title_h+'</td>'+	
 						'<td><input type="button" value="Change Status" class="btn btn-primary btn-flat margin" onclick="return viewP('+response[i].id+')"/></td>';

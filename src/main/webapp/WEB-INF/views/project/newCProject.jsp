@@ -101,6 +101,20 @@ color:red;
         <form:hidden path="id" id="id"  class="form-control"/>
         <div class="box-body" >
              <%--  <%String add=null;%>	 --%>
+             	<div class="row">
+			<div class="form-group col-md-12">
+				<label class="col-md-3  control-lable" for="type">Category<sup>*</sup></label>
+				<form:errors style="color: red"  path='type' />
+				<div class="col-md-7">
+					<div class="input-group">
+					 
+					  <form:radiobutton path="type" value="Project" onchange="onchoosetype()"/>Project
+					  <form:radiobutton path="type" value="Tp Scheme" onchange="onchoosetype()"/>Tp Scheme
+				    </div> 
+				</div>
+			</div>
+		</div>
+             
 		<div class="row">
 			<div class="form-group col-md-12">
 				<label class="col-md-3  control-lable" for="title">Title in English<sup>*</sup></label>
@@ -339,11 +353,12 @@ color:red;
 					 <div class="input-group">
 					 <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
 				         <!-- <input type="text" name="atitle" id="atitle" class="form-control"/> -->
-				         <select id="atitle" name="atitle" class="form-control">
+				         <select id="atitle0" name="atitle" class="form-control">
 				         <option value="select">--Select--</option>
 				         <option value="Map">Map</option>
 				          <option value="Photo">Photo</option>
 				           <option value="Video">Video</option>
+				           <option value="Document" class="docOp" style="display: none;">Document</option>
 				         </select>
 					 </div>	
 				</div>
@@ -357,7 +372,7 @@ color:red;
 				<div class="col-md-7">
 					 <div class="input-group">
 					  <span class="input-group-addon"><i class="fa fa-file"></i></span>					 				  
-						<input type="file" name="english" id="english" class="form-control"  />
+						<input type="file" name="english" id="english0" class="form-control" onchange="validateFile(0)" />
 					 </div>	
 				</div>
 			</div>
@@ -457,13 +472,14 @@ color:red;
 
 
 <input type="hidden" id="action" value="${action}" /> 
-<script>
+<script type="text/javascript">
+var mapcnt=0;var videocnt=0;
+
 $( document ).ready(function() {
 	$("#projectlist").addClass("active");
   	$("#UserElement").addClass("active");
 });
-  </script>
-<script type="text/javascript">
+ 
  $(function() {	
 	 var i=0;
 	 $('#AddMoreFields').click( function(){
@@ -563,11 +579,12 @@ var html = '<br><div id="a'+i+'"><div class="row">'+
 							' <div class="input-group">'+
 								'<span class="input-group-addon">'+
 									'<i class="fa fa-pencil"></i></span>'+
-										' <select id="atitle" name="atitle" class="form-control">'+
+										' <select id="atitle'+i+'" name="atitle" class="form-control">'+
 				         '<option value="select">--Select--</option>'+
 				         '<option value="Map">Map</option>'+
 				         '<option value="Photo">Photo</option>'+
 				          ' <option value="Video">Video</option>'+
+				          ' <option value="Document" class="docOp" style="display: none;">Document</option>'+
 				        ' </select>'+
 				        '</div></div>'+
 						'<div class="col-md-2"><input style="margin:0px;" type="button" value="Delete" onclick="deleteAttachmentDiv('+i+')" class="btn bg-red btn-flat margin"></div>'+
@@ -579,16 +596,17 @@ var html = '<br><div id="a'+i+'"><div class="row">'+
 							' <div class="input-group">'+
 								'<span class="input-group-addon">'+
 									'<i class="fa fa-file"></i></span>'+
-										'<input type="file" name="english" id="english" class="form-control"  />'+			
+										'<input type="file" name="english" id="english'+i+'" class="form-control" onchange="validateFile('+i+')" />'+			
 			'</div>	</div></div></div></div>';
      
      $('#newdiv').append(html);
    
+     onchoosetype();
  }
 	
 </script>
 
-<script>
+<!-- <script>
 /* FILE VALIDATION */
   $(function () {
 	    $('input[type=file]').change(function () {
@@ -610,9 +628,10 @@ var html = '<br><div id="a'+i+'"><div class="row">'+
 	            $(this).val('');
 	            alert('Can Not Upload File Greater than 2MB');
 	        } */ //if
+	       
 	       });//change func
 	});//funct
-</script>
+</script> -->
 <script>
 function deleteAttachment(id,type){
 	//alert(id);
@@ -673,6 +692,45 @@ function deleteAttachmentDiv(i){
 function attachmentDownload(id){
 	  $("#attachid").val(id);
 	  $("#viewAttachform").submit();
+}
+
+function onchoosetype(){
+	var type = document.querySelector('input[name="type"]:checked').value;
+	if(type=="Project"){
+		$(".docOp").hide();
+	}else if(type=="Tp Scheme"){
+		$(".docOp").show();
+	}
+	
+}
+
+function validateFile(k){ 
+	var atitle = $("#atitle"+k).val();
+	if(atitle=="Map" || atitle=="Photo"){
+		  var val = $("#english"+k).val().toLowerCase(),
+          regex = new RegExp("(.*?)\.(jpg|png|jpeg)$");
+     
+       if (!(regex.test(val))) {
+          $("#english"+k).val('');
+          alert('You must select an image file only');
+      }
+	}else if(atitle=="Video"){
+		  var val = $("#english"+k).val().toLowerCase(),
+          regex = new RegExp("(.*?)\.(mp4)$");
+     
+       if (!(regex.test(val))) {
+          $("#english"+k).val('');
+          alert('You must select video file only');
+      }
+	}else if(atitle=="Document"){
+		  var val = $("#english"+k).val().toLowerCase(),
+          regex = new RegExp("(.*?)\.(pdf)$");
+     
+       if (!(regex.test(val))) {
+          $("#english"+k).val('');
+          alert('You must select pdf file only');
+      }
+	}
 }
 </script>
 

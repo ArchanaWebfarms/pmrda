@@ -26,5 +26,6 @@ public interface ProjectDao {
 	public void deleteProjectScope(int id);
 	public List<Project> getAllPendingProject(String status);
 	public List<Project> getAllAdminActiveProject();
+	public List<Project> getProjectListByApprovedStatusAndType(String type);
 	
 }

@@ -125,7 +125,7 @@ public class AdminController extends AbstractControllerHelper {
 	 * @Admin View tender By Id
 	 *
 	 */
-	@RequestMapping(value = "/adminTendorView",method=RequestMethod.POST)
+	@RequestMapping(value = "/adminTendorView",method={RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView adminTendorView(HttpServletRequest request, ModelAndView adminTendorViewModel,HttpSession session) throws ParseException {
 		try {
 			String login=(String) session.getAttribute("login");	

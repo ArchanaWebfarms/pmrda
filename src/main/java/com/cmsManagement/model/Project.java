@@ -79,6 +79,9 @@ public class Project implements Serializable {
 	private String delete_approval_date;
 	@SafeHtml(message = "*Invalid Input")
 	private String delete_approval_comment;
+	@SafeHtml(message = "*Invalid Input")
+	@NotEmpty(message="**Required")
+	private String type;
 
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -336,6 +339,14 @@ public class Project implements Serializable {
 	}
 	public void setDelete_approval_comment(String delete_approval_comment) {
 		this.delete_approval_comment = delete_approval_comment;
+	}
+	
+	@Column(name = "type")
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 

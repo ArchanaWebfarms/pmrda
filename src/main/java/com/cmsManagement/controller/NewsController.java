@@ -315,7 +315,7 @@ public class NewsController extends AbstractControllerHelper{
 	 *
 	 */
 	
-	@RequestMapping(value = "/view_News",method=RequestMethod.POST)
+	@RequestMapping(value = "/view_News",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView viewNews(HttpServletRequest req,ModelAndView viewNewsModel,News news,Attachment attachment, SecurityContextHolder auth,HttpSession session ) throws ParseException {
 		try {
 			String login=(String) session.getAttribute("login");
@@ -364,7 +364,7 @@ public class NewsController extends AbstractControllerHelper{
 		return viewNewsModel;
 	}
 
-	@RequestMapping(value = "/editNews",method=RequestMethod.POST)
+	@RequestMapping(value = "/editNews",method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView EditNews(HttpServletRequest req,ModelAndView EditNewsModel,News  news,Attachment attachment,BindingResult result, ModelAndView modelAndView, HttpSession session, SecurityContextHolder auth) throws ParseException {
 		
 		try {
@@ -513,7 +513,7 @@ public class NewsController extends AbstractControllerHelper{
 	 * @Admin View News By Id
 	 *
 	 */
-	@RequestMapping(value ="adminviewNews",method=RequestMethod.POST)
+	@RequestMapping(value ="adminviewNews",method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView AdminViewNews(ModelAndView AdminViewNewsModel,HttpServletRequest req,@ModelAttribute("news") News news,BindingResult result, Attachment attachment,HttpSession session) throws ParseException {
 		try {
 			String login=(String) session.getAttribute("login");	
@@ -719,7 +719,7 @@ public class NewsController extends AbstractControllerHelper{
 		return newsList;
 	}
 
-	@RequestMapping(value = "/adminDeleteViewNews",method=RequestMethod.POST)
+	@RequestMapping(value = "/adminDeleteViewNews",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView adminDeleteViewNews(ModelAndView model,HttpSession session,HttpServletRequest req) {
 		try {
 			String login=(String) session.getAttribute("login");			
@@ -796,7 +796,7 @@ public class NewsController extends AbstractControllerHelper{
 		return model;
 	}
 
-	@RequestMapping(value = "/ViewDeactivatedNews",method=RequestMethod.POST)
+	@RequestMapping(value = "/ViewDeactivatedNews",method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView ViewDeactivatedOpening(ModelAndView model,HttpServletRequest req,HttpSession session) {
 		try {
 			String login=(String) session.getAttribute("login");			
