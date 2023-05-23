@@ -142,7 +142,7 @@ public class TendorDepartmentController extends AbstractControllerHelper{
 		return deleteTenderDepartmentModel;
 	}
 
-	@RequestMapping(value="editTenderDepartment",method=RequestMethod.POST)
+	@RequestMapping(value="editTenderDepartment",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView editTenderDepartment(ModelAndView editTenderDepartmentModel, HttpServletRequest request,HttpSession session){
 		try {
 			String login=(String) session.getAttribute("login");	

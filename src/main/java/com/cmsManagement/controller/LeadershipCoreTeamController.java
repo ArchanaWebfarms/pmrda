@@ -154,7 +154,7 @@ public class LeadershipCoreTeamController extends AbstractControllerHelper{
 		return model;
 	}
 
-	@RequestMapping(value = "/editLeader",method=RequestMethod.POST)
+	@RequestMapping(value = "/editLeader",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView editLeader(@ModelAttribute("leader") LeadershipCoreTeam leader,ModelAndView model,HttpSession session,HttpServletRequest req) {
 		try {
 			String login=(String) session.getAttribute("login");	
@@ -194,7 +194,7 @@ public class LeadershipCoreTeamController extends AbstractControllerHelper{
 		return model;
 	}
 
-	@RequestMapping(value = "/viewLeader",method=RequestMethod.POST)
+	@RequestMapping(value = "/viewLeader",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView viewLeader(ModelAndView model,HttpSession session,HttpServletRequest req) {
 		try {
 			String login=(String) session.getAttribute("login");	
@@ -372,7 +372,7 @@ public class LeadershipCoreTeamController extends AbstractControllerHelper{
 		return model;
 	}
 
-	@RequestMapping(value = "/editCoreTeam",method=RequestMethod.POST)
+	@RequestMapping(value = "/editCoreTeam",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView editCoreTeam(@ModelAttribute("leader") LeadershipCoreTeam leader,ModelAndView model,HttpSession session,HttpServletRequest req) {
 		try {
 			String login=(String) session.getAttribute("login");	
@@ -413,7 +413,7 @@ public class LeadershipCoreTeamController extends AbstractControllerHelper{
 		return model;
 	}
 
-	@RequestMapping(value = "/viewCoreTeam",method=RequestMethod.POST)
+	@RequestMapping(value = "/viewCoreTeam",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView viewCoreTeam(ModelAndView model,HttpSession session,HttpServletRequest req) {
 		try {
 			String login=(String) session.getAttribute("login");	

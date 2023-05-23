@@ -233,7 +233,7 @@ public class UserController extends AbstractControllerHelper{
 	/**
 	 * @return User by id to Show User Information
 	 */
-	@RequestMapping(value = "/viewUser",method=RequestMethod.POST)
+	@RequestMapping(value = "/viewUser",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView viewUser(HttpServletRequest request, ModelAndView viewUserModel,HttpSession session) {
 		try {
 			String login=(String) session.getAttribute("login");	
@@ -276,7 +276,7 @@ public class UserController extends AbstractControllerHelper{
 	 * page to update user.
 	 * @return
 	 */
-	@RequestMapping(value = "/editUser",method=RequestMethod.POST)
+	@RequestMapping(value = "/editUser",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView editUser(HttpServletRequest request, ModelAndView editUserModel,HttpSession session) {
 		try {
 			String login=(String) session.getAttribute("login");	
@@ -356,7 +356,7 @@ public class UserController extends AbstractControllerHelper{
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/changePassword",method=RequestMethod.POST)
+	@RequestMapping(value = "/changePassword",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView changePassword(HttpServletRequest request,  ModelAndView changePasswordModel,HttpSession session) {		
 		try {
 			String login=(String) session.getAttribute("login");	

@@ -155,7 +155,7 @@ public class DepartmentController extends AbstractControllerHelper {
 	}
 
 
-	@RequestMapping(value="viewDepartment",method=RequestMethod.POST)
+	@RequestMapping(value="viewDepartment",method= {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView viewDepartment(ModelAndView model, HttpServletRequest request,HttpSession session, SecurityContextHolder auth){
 		try
 		{
@@ -201,7 +201,7 @@ public class DepartmentController extends AbstractControllerHelper {
 		return model;
 	}
 
-	@RequestMapping(value="editDepartment",method=RequestMethod.POST)
+	@RequestMapping(value="editDepartment",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView editDepartment(@ModelAttribute("departments")  Department departments,ModelAndView editDepartmentModel, HttpServletRequest request,HttpSession session, SecurityContextHolder auth){		
 		try
 		{
@@ -389,7 +389,7 @@ public class DepartmentController extends AbstractControllerHelper {
 	}
 
 
-	@RequestMapping(value="/viewTaluka",method=RequestMethod.POST)
+	@RequestMapping(value="/viewTaluka",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView viewTaluka(HttpServletRequest req,ModelAndView model,HttpSession session){
 		try{
 			String login=(String) session.getAttribute("login");	
@@ -429,7 +429,7 @@ public class DepartmentController extends AbstractControllerHelper {
 	}
 
 
-	@RequestMapping(value="/editTaluka",method=RequestMethod.POST)
+	@RequestMapping(value="/editTaluka",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView editTaluka(@ModelAttribute("taluka") Taluka taluka,ModelAndView model,HttpSession session,HttpServletRequest req){
 		try{
 			String login=(String) session.getAttribute("login");	
@@ -753,7 +753,7 @@ public class DepartmentController extends AbstractControllerHelper {
 		return model;
 	}
 
-	@RequestMapping(value = "/adminViewDepartment",method=RequestMethod.POST)
+	@RequestMapping(value = "/adminViewDepartment",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView adminViewDepartment(ModelAndView model,HttpSession session,HttpServletRequest req) {
 		try {
 			String login=(String) session.getAttribute("login");	
@@ -840,7 +840,7 @@ public class DepartmentController extends AbstractControllerHelper {
 		return deptList;
 	}
 
-	@RequestMapping(value = "/adminDeleteViewDepartment",method=RequestMethod.POST)
+	@RequestMapping(value = "/adminDeleteViewDepartment",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView adminDeleteViewNews(ModelAndView model,HttpSession session,HttpServletRequest req) {
 		try {
 			String login=(String) session.getAttribute("login");	
@@ -935,7 +935,7 @@ public class DepartmentController extends AbstractControllerHelper {
 		return model;
 	}
 
-	@RequestMapping(value = "/viewDeactivatedDepartment",method=RequestMethod.POST)
+	@RequestMapping(value = "/viewDeactivatedDepartment",method= {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView viewDeactivatedDepartment(ModelAndView model,HttpServletRequest req,HttpSession session) {
 		try {
 			String login=(String) session.getAttribute("login");	

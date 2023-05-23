@@ -491,7 +491,7 @@ public class GalaryController {
 		}
 	}
 
-	@RequestMapping(value = "/editVideo",method=RequestMethod.POST)
+	@RequestMapping(value = "/editVideo",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView editVideo(ModelAndView NewImage, HttpSession session,HttpServletRequest req) {
 		try {
 			String login=(String) session.getAttribute("login");	

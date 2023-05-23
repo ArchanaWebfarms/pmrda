@@ -109,7 +109,7 @@
 									<td style="text-align:center;"><span id="SitePH_grdupload_lblSN_0">${status.index + 1}</span>
 									</td>
 									<td><span id="SitePH_grdupload_lblCategory_0">${projectList.title}</span></td>
-									<td style="text-align:center;"><a class="btn mr-2 text-white" href="javascript:getTpScheme(${projectList.id})">View</a></td>
+									<td style="text-align:center;"><a class="btn mr-2 text-white" href="javascript:getTpScheme(${projectList.id})">पहा</a></td>
 								</tr>
 
 							 </c:forEach> 

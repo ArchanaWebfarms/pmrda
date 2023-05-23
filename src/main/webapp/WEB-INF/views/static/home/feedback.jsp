@@ -376,7 +376,7 @@ $(document).ready(function(){
 				</div>			
 				
 				<div class="col-md-2 flabel">
-				Verification Code :
+				<spring:message code="index.feedback.verificationcode"  /> :
 				<sup >*</sup>
 				</div>
 				<div class="col-md-4" style="margin-bottom:10px;">

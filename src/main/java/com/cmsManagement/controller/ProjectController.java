@@ -211,7 +211,7 @@ public class ProjectController extends AbstractControllerHelper {
 	}//
 
 
-	@RequestMapping(value="editproject",method=RequestMethod.POST)
+	@RequestMapping(value="editproject",method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView editproject( HttpServletRequest request,ModelAndView projectmodel,@ModelAttribute("project") Project project   ,BindingResult result, HttpSession session, SecurityContextHolder auth){
 		try
 		{
@@ -272,7 +272,7 @@ public class ProjectController extends AbstractControllerHelper {
 	}
 
 
-	@RequestMapping(value="view_project",method=RequestMethod.POST)
+	@RequestMapping(value="view_project",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView view_project( HttpServletRequest request,ModelAndView projectmodel,@ModelAttribute("project") Project project    ,BindingResult result, HttpSession session, SecurityContextHolder auth){
 		try
 		{
@@ -441,7 +441,7 @@ public class ProjectController extends AbstractControllerHelper {
 	}
 
 
-	@RequestMapping(value ="/adminviewProject",method=RequestMethod.POST)
+	@RequestMapping(value ="/adminviewProject",method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView AdminViewNews(ModelAndView AdminViewProjectModel,HttpServletRequest req,@ModelAttribute("project") Project project,BindingResult result, Attachment attachment,HttpSession session) throws ParseException {
 		try {
 			String login=(String) session.getAttribute("login");	
@@ -703,7 +703,7 @@ public class ProjectController extends AbstractControllerHelper {
 		return list;
 	}
 
-	@RequestMapping(value = "/adminDeleteViewProject",method=RequestMethod.POST)
+	@RequestMapping(value = "/adminDeleteViewProject",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView adminDeleteViewNews(ModelAndView model,HttpSession session,HttpServletRequest req) {
 		try {
 			String login=(String) session.getAttribute("login");	
@@ -762,7 +762,7 @@ public class ProjectController extends AbstractControllerHelper {
 		return model;
 	}
 
-	@RequestMapping(value = "/viewDeactivatedProject",method=RequestMethod.POST)
+	@RequestMapping(value = "/viewDeactivatedProject",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView ViewDeactivatedOpening(ModelAndView model,HttpServletRequest req,HttpSession session) {
 		try {
 			String login=(String) session.getAttribute("login");	

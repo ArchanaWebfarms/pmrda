@@ -100,7 +100,7 @@ public class FeedBackController extends AbstractControllerHelper {
 	/**
 	 * @return FeedBack Details by id.
 	 */
-	@RequestMapping(value ="viewFeedBackDetails",method=RequestMethod.POST)
+	@RequestMapping(value ="viewFeedBackDetails",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView viewFeedBackDetails(ModelAndView viewFeedBackDetailsModel, HttpServletRequest request,HttpSession session) {
 		try {
 			String login=(String) session.getAttribute("login");	
@@ -183,7 +183,7 @@ public class FeedBackController extends AbstractControllerHelper {
 	}
 
 
-	@RequestMapping(value ="viewEnquiry",method=RequestMethod.POST)
+	@RequestMapping(value ="viewEnquiry",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView viewEnquiry(ModelAndView viewFeedBackDetailsModel, HttpServletRequest request,HttpSession session) {
 		try {
 			String login=(String) session.getAttribute("login");	

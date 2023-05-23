@@ -258,8 +258,8 @@ h4{
                  <h4 style="color:#0086b2"><spring:message code="project.h4.docpro" /></h4>
                  <table>
                  <tr>
-                 <th>Sr. No.</th>
-                 <th>Document</th>
+                 <th><spring:message code="screenreader.th1" /></th>
+                 <th><spring:message code="department.tabset.tab4" /></th>
                  </tr>
                  <c:forEach var="docs" items="${docs}" varStatus="sr">
                  <tr>

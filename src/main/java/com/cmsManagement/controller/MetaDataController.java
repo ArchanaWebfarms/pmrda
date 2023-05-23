@@ -114,7 +114,7 @@ public class MetaDataController {
 
 
 
-	@RequestMapping(value="editMeta",method=RequestMethod.POST)
+	@RequestMapping(value="editMeta",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView editDepartment( HttpServletRequest request,ModelAndView adminTenderListModel,@ModelAttribute("meta") MetaData meta  ,BindingResult result, HttpSession session, SecurityContextHolder auth){
 		try {
 			String login=(String) session.getAttribute("login");	
@@ -153,7 +153,7 @@ public class MetaDataController {
 	}
 
 
-	@RequestMapping(value="view_Meta",method=RequestMethod.POST)
+	@RequestMapping(value="view_Meta",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView view_Meta( HttpServletRequest request,ModelAndView adminTenderListModel,@ModelAttribute("meta") MetaData meta  ,BindingResult result, HttpSession session, SecurityContextHolder auth){
 		try {
 			String login=(String) session.getAttribute("login");	

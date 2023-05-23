@@ -167,7 +167,7 @@ public class RoleController extends AbstractControllerHelper{
 	 * page to update Role.
 	 * @return
 	 */
-	@RequestMapping(value = "/editRole",method=RequestMethod.POST)
+	@RequestMapping(value = "/editRole",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView editRole(@ModelAttribute("roles")  Roles roles, HttpServletRequest request, ModelAndView editRoleModel,HttpSession session) {
 		try {
 			String login=(String) session.getAttribute("login");	

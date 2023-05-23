@@ -145,7 +145,7 @@ public class CurrentOpeningController extends AbstractControllerHelper{
 		return model;
 	}
 
-	@RequestMapping(value = "/editOpening",method=RequestMethod.POST)
+	@RequestMapping(value = "/editOpening",method= {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView editOpening(@ModelAttribute("opening") CurrentOpening opening,ModelAndView model,HttpSession session,HttpServletRequest req, SecurityContextHolder auth) {
 		try
 		{
@@ -280,7 +280,7 @@ public class CurrentOpeningController extends AbstractControllerHelper{
 		return model;
 	}
 
-	@RequestMapping(value = "/viewOpening",method=RequestMethod.POST)
+	@RequestMapping(value = "/viewOpening",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView viewOpening(ModelAndView model,HttpSession session,HttpServletRequest req, SecurityContextHolder auth) {
 		try
 		{
@@ -350,7 +350,7 @@ public class CurrentOpeningController extends AbstractControllerHelper{
 		return model;
 	}
 
-	@RequestMapping(value = "/adminViewOpening",method=RequestMethod.POST)
+	@RequestMapping(value = "/adminViewOpening",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView adminViewOpening(ModelAndView model,HttpSession session,HttpServletRequest req) {
 		try {
 			String login=(String) session.getAttribute("login");	
@@ -454,7 +454,7 @@ public class CurrentOpeningController extends AbstractControllerHelper{
 		return model;
 	}
 
-	@RequestMapping(value = "/adminDeleteViewOpening",method=RequestMethod.POST)
+	@RequestMapping(value = "/adminDeleteViewOpening",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView adminDeleteViewOpening(ModelAndView model,HttpSession session,HttpServletRequest req) {
 		try {
 			String login=(String) session.getAttribute("login");	
@@ -520,7 +520,7 @@ public class CurrentOpeningController extends AbstractControllerHelper{
 	}
 
 
-	@RequestMapping(value = "/ViewDeactivatedOpening",method=RequestMethod.POST)
+	@RequestMapping(value = "/ViewDeactivatedOpening",method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView ViewDeactivatedOpening(ModelAndView model,HttpServletRequest req,HttpSession session) {
 		try {
 			String login=(String) session.getAttribute("login");	
