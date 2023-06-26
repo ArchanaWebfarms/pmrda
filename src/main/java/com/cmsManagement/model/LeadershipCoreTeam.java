@@ -50,7 +50,15 @@ public class LeadershipCoreTeam {
 	@NotBlank(message="**Required")
 	private String description_h;
 	private String role;
+	private int sequence;
 	
+	@Column(name = "sequence")
+	public int getSequence() {
+		return sequence;
+	}
+	public void setSequence(int sequence) {
+		this.sequence = sequence;
+	}
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id")
 	public int getId() {

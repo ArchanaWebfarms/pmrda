@@ -105,6 +105,8 @@
 									<!-- <option value="NOTIFICATION">NOTIFICATION</option> -->
 									<option value="POLICIES">POLICIES</option>
 									<option value="RTI">PROACTIVE DISCLOSURES</option>
+									<option value="PMAY">PMAY</option>
+									<option value="MEDIA CENTER">MEDIA CENTER</option>
 									
 								</select>
 							</div>

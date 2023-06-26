@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -82,8 +83,16 @@ public class Project implements Serializable {
 	@SafeHtml(message = "*Invalid Input")
 	@NotEmpty(message="**Required")
 	private String type;
-
-
+	
+	private String delete_approved_name;
+	
+	@Transient
+	public String getDelete_approved_name() {
+		return delete_approved_name;
+	}
+	public void setDelete_approved_name(String delete_approved_name) {
+		this.delete_approved_name = delete_approved_name;
+	}
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id", nullable =false)
 	public int getId() {

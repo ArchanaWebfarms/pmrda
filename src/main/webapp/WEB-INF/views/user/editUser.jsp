@@ -109,9 +109,9 @@
 				<div class="col-md-7">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-						<form:input type="text" path="username" onkeyup="checkname();" id="username" class="form-control"/>
+						<form:input type="text" path="username" id="username" class="form-control" onkeyup="validateUsername()"/>
 					</div>
-				</div>
+				</div><span style="color: red"  id="usernameError"></span>
 			</div>
 		</div>
 		
@@ -157,9 +157,9 @@
 				<div class="col-md-7">
 					 <div class="input-group">
 					  <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-						<form:input type="text" path="email" id="email" class="form-control"/>
+						<form:input type="text" path="email" id="email" class="form-control" onkeyup="validateEmail()"/>
 					 </div>	
-				</div>
+				</div><span style="color: red"  id="emailError"></span>
 			</div>
 		</div>	  		
 		  		
@@ -309,6 +309,44 @@ function checkname(){
 			}else{
 				return false;
 			}
+		}
+		
+		function validateEmail(){
+			var email = $("#email").val();
+			var id = $("#user_id").val();
+			
+			 $.ajax({
+					url:"validateUserEmail?email="+email+"&id="+id,
+					success:function(response){
+				     if(response==true){
+				    	 document.getElementById("emailError").innerHTML="Email Already Exists.";
+				    	 $("#email").val("")
+				    	 document.getElementById("submitBtn").disabled = true;
+				     }else{ 
+				    	 document.getElementById("emailError").innerHTML="";
+				     document.getElementById("submitBtn").disabled = false;
+				     }
+					}
+				}); 
+		}
+		
+		function validateUsername(){
+			var username = $("#username").val();
+			var id = $("#user_id").val();
+			
+			 $.ajax({
+					url:"validateUsername?username="+username+"&id="+id,
+					success:function(response){	
+						if(response==true){
+				    	 document.getElementById("usernameError").innerHTML="Username Already Exists.";
+				    	 $("#username").val("")
+				    	 document.getElementById("submitBtn").disabled = true;
+				     }else{ 
+				    	 document.getElementById("usernameError").innerHTML="";
+				     document.getElementById("submitBtn").disabled = false;
+				     }
+					}
+				}); 
 		}
 	</script>
 

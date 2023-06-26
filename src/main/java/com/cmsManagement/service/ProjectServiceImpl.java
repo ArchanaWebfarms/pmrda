@@ -55,7 +55,7 @@ public class ProjectServiceImpl implements projectService {
 	public int saveProject(Project project) {
 		System.out.println("idddddd :"+LoginController.getCurrentLoggedInUser().getUser().getUser_id());
 		User user=userService.findUserById(LoginController.getCurrentLoggedInUser().getUser().getUser_id());
-		System.out.println("user :"+user.toString());
+		//System.out.println("user :"+user.toString());
 		//project.setCreated_by((LoginController.getCurrentLoggedInUser().getUser().getUser_id()));
 		project.setUser(user);
 		project.setCreated_on(MethodsHelper.getCurrentDate());
@@ -63,6 +63,8 @@ public class ProjectServiceImpl implements projectService {
 		project.setApprovedStatus(Constants.PENDING_STATUS);	
 		project.setFinancialYear(financialYearDao.getCurrentActiveFinancialYear());
 		project.setDelete_approval_status("Active");
+		project.setModified_by(user.getUser_id());
+		project.setModified_on(MethodsHelper.getCurrentDateAndTime1());
 		return projectDao.saveProject(project);
 		
 	}
@@ -75,7 +77,7 @@ public class ProjectServiceImpl implements projectService {
 			project.setUser(info.getUser());
 			project.setDate(MethodsHelper.getCurrentDate());
 			project.setModified_by(LoginController.getCurrentLoggedInUser().getUser().getUser_id());
-			project.setModified_on(MethodsHelper.getCurrentDate());
+			project.setModified_on(MethodsHelper.getCurrentDateAndTime1());
 			project.setStatus("A");
 			project.setApprovedStatus(Constants.PENDING_STATUS);
 			project.setDelete_approval_status("Active");
@@ -103,6 +105,10 @@ public class ProjectServiceImpl implements projectService {
 		
 		/*Prevent project from xss attack*/
 		project=PreventionFromXSSAttack.preventProject(project);
+		
+		project.setModified_by(LoginController.getCurrentLoggedInUser().getUser().getUser_id());
+		project.setModified_on(MethodsHelper.getCurrentDateAndTime1());
+		
 		projectDao.updateStatus(project);
 
 	}
@@ -148,7 +154,7 @@ public class ProjectServiceImpl implements projectService {
 		Project project=projectDao.getProjectById(id);		
 		project.setDelete_approval_status(StringEscapeUtils.escapeHtml4(approvedStatus));
 		project.setDelete_approved_by(LoginController.getCurrentLoggedInUser().getUser().getUser_id());
-		project.setDelete_approval_date(MethodsHelper.getCurrentDate());
+		project.setDelete_approval_date(MethodsHelper.getCurrentDateAndTime1());
 		project.setDelete_approval_comment(ValidateInput.replaceAll(StringEscapeUtils.escapeHtml4(comment)));
 		
 		if(approvedStatus.equals("Deactivate")){

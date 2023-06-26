@@ -1,6 +1,7 @@
 package com.cmsManagement.controller;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,8 +67,48 @@ public class LeadershipCoreTeamController extends AbstractControllerHelper{
 				if(LoginController.getCurrentLoggedInUser().getUser().getRoleID().getRole_type().equals(GrantedPermission.ADMIN_ROLE) ||
 						LoginController.getCurrentLoggedInUser().getUser().getRoleID().getRole_type().equals(GrantedPermission.SUPER_ADMIN_ROLE)){
 					try {
+						try {
+							List<LeadershipCoreTeam> leaderList = leadershipCoreTeamService.getAllLeadersList("LEADER");
+							for(LeadershipCoreTeam l: leaderList) {
+								if(l.getSequence()==0) {
+									int maxSr = leadershipCoreTeamService.getLastSequence(Constants.ACTIVE_STATE,"LEADER");
+									l.setSequence(maxSr+1);
+									leadershipCoreTeamService.updateSequence(l);
+								}
+							}
+						}catch(Exception e) {
+							e.printStackTrace();
+						}						
 						List<LeadershipCoreTeam> list=leadershipCoreTeamService.getAllLeadersList("LEADER");
-						System.err.println(list.size());
+						Collections.reverse(list);
+						
+						boolean cm=false;
+						boolean comm=false;
+						for(LeadershipCoreTeam l:list) {
+							if(l.getId()==1) {
+								cm=true;
+							}
+							if(l.getId()==3) {
+								comm=true;
+							}
+						}						
+						try {
+							if(!cm) {
+								LeadershipCoreTeam leader = leadershipCoreTeamService.viewLeaderById(1);
+								leader.setState("A");
+								list.add(leader);
+								leadershipCoreTeamService.activateLeader(leader);								
+							}
+						} catch (Exception e) {	e.printStackTrace();}
+						try {
+							if(!comm) {
+								LeadershipCoreTeam leader = leadershipCoreTeamService.viewLeaderById(3);
+								leader.setState("A");
+								list.add(leader);
+								leadershipCoreTeamService.activateLeader(leader);	
+							}
+						} catch (Exception e) {e.printStackTrace();	}
+						Collections.reverse(list);
 						model.addObject("list", list);
 						model.setViewName("LeadershipCoreTeam/LeadershipList");
 					} catch (Exception e) {
@@ -97,6 +138,8 @@ public class LeadershipCoreTeamController extends AbstractControllerHelper{
 				if(LoginController.getCurrentLoggedInUser().getUser().getRoleID().getRole_type().equals(GrantedPermission.ADMIN_ROLE) ||
 						LoginController.getCurrentLoggedInUser().getUser().getRoleID().getRole_type().equals(GrantedPermission.SUPER_ADMIN_ROLE)){
 					try {	
+						int maxSr = leadershipCoreTeamService.getLastSequence(Constants.ACTIVE_STATE,"LEADER");
+						leader.setSequence(maxSr+1);
 						model.addObject("leader", leader);
 						model.addObject("action", "new");
 						model.setViewName("LeadershipCoreTeam/NewLeadership");
@@ -273,6 +316,18 @@ public class LeadershipCoreTeamController extends AbstractControllerHelper{
 				if(LoginController.getCurrentLoggedInUser().getUser().getRoleID().getRole_type().equals(GrantedPermission.ADMIN_ROLE) ||
 						LoginController.getCurrentLoggedInUser().getUser().getRoleID().getRole_type().equals(GrantedPermission.SUPER_ADMIN_ROLE)){
 					try {	
+						try {
+							List<LeadershipCoreTeam> leaderList = leadershipCoreTeamService.getAllLeadersList("CORE TEAM");
+							for(LeadershipCoreTeam l: leaderList) {
+								if(l.getSequence()==0) {
+									int maxSr = leadershipCoreTeamService.getLastSequence(Constants.ACTIVE_STATE,"CORE TEAM");
+									l.setSequence(maxSr+1);
+									leadershipCoreTeamService.updateSequence(l);
+								}
+							}
+						}catch(Exception e) {
+							e.printStackTrace();
+						}
 						List<LeadershipCoreTeam> list=leadershipCoreTeamService.getAllLeadersList("CORE TEAM");
 						System.err.println(list.size());
 						model.addObject("list", list);
@@ -304,6 +359,8 @@ public class LeadershipCoreTeamController extends AbstractControllerHelper{
 				if(LoginController.getCurrentLoggedInUser().getUser().getRoleID().getRole_type().equals(GrantedPermission.ADMIN_ROLE) ||
 						LoginController.getCurrentLoggedInUser().getUser().getRoleID().getRole_type().equals(GrantedPermission.SUPER_ADMIN_ROLE)){
 					try {
+						int maxSr = leadershipCoreTeamService.getLastSequence(Constants.ACTIVE_STATE,"CORE TEAM");
+						leader.setSequence(maxSr+1);
 						model.addObject("leader", leader);
 						model.addObject("action", "new");
 						model.addObject("departments", departmentService.getDepartment());

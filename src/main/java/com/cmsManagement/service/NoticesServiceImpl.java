@@ -158,7 +158,7 @@ public class NoticesServiceImpl implements NoticesService {
 
 	@Override
 	public boolean changeNoticesStaus(int noticeID, String comment, String status) {
-		String date=MethodsHelper.getCurrentDateAndTime();		
+		String date=MethodsHelper.getCurrentDateAndTime();	
 		return noticesDao.changeNoticesStaus(noticeID, comment, status, (LoginController.getCurrentLoggedInUser().getUser().getFirstName()+" "+LoginController.getCurrentLoggedInUser().getUser().getLastName()), date);
 	}
 	

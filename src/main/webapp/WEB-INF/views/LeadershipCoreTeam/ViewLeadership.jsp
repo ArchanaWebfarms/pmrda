@@ -77,6 +77,7 @@
 		      <div class="row invoice-info">
 		        <!-- /.col -->
 		        <div class="col-sm-12 invoice-col">
+		        <h4><b>Sequence : </b>${leader.sequence}</h4>   
 		           <h4><b>Name in English : </b>${leader.name}</h4>   
 		             <h4><b>Name in Marathi: </b>${leader.name_h}</h4>   
 		            <h4><b>Position in English : </b>${leader.positon}</h4>	             

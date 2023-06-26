@@ -144,7 +144,7 @@ $(document).ready(function(){
 							</div>
 							<div class="row">
 								<div class="col-md-12" style="text-align:center; padding:15px;">
-									<a style="padding:10px;"" href="forgotPass">Forgot Password?Click Here</a>
+									<a style="padding:10px;" href="forgotPass">Forgot Password?Click Here</a>
 								</div>
 							</div>
 						</form>

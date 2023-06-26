@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -50,6 +51,30 @@ public class LeadershipCoreTeamDaoImpl extends AbstractDao<Integer, LeadershipCo
 	@Override
 	public void deleteLeader(int id) {
 		getSession().createQuery("update LeadershipCoreTeam set state='D' where id="+id+"").executeUpdate();
+	}
+
+	@Override
+	public int getLastSequence(String activeState,String role) {
+		String query2="select max(sequence) from LeadershipCoreTeam where state='A' and role='"+role+"'";
+		return (int) getSession().createQuery(query2).list().get(0);	
+	}
+
+	@Override
+	public List<LeadershipCoreTeam> getAllLeadersListBySquence(String role) {
+		Criteria cr = getSession().createCriteria(LeadershipCoreTeam.class)
+				.add(Restrictions.eq("state",Constants.ACTIVE_STATE))	
+				.add(Restrictions.eq("role",role))	
+				.addOrder(Order.asc("sequence"));
+		return cr.list();
+	}
+
+	@Override
+	public LeadershipCoreTeam getBySequence(String role, int sequence) {
+		Criteria cr = getSession().createCriteria(LeadershipCoreTeam.class)
+				.add(Restrictions.eq("state",Constants.ACTIVE_STATE))	
+				.add(Restrictions.eq("role",role))	
+				.add(Restrictions.eq("sequence",sequence));	
+		return (LeadershipCoreTeam) cr.uniqueResult();
 	}
 
 }

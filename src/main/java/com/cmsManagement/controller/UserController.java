@@ -494,7 +494,45 @@ public class UserController extends AbstractControllerHelper{
 		return model;
 	}
 
-
+	@ResponseBody
+	@RequestMapping(value = "/validateUserEmail")
+	public boolean validateUserEmail(HttpServletRequest request) {
+		boolean isExists=false;
+		String email = request.getParameter("email");
+		int userId = Integer.parseInt(request.getParameter("id"));
+		
+		User user = userService.findUserByEmail(email);
+		if(user!=null) {
+			if(userId==0) {
+				isExists=true;
+			}else {
+				if(userId!=user.getUser_id()) {
+					isExists=true;
+				}
+			}			
+		}		
+		return isExists;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/validateUsername")
+	public boolean validateUsername(HttpServletRequest request) {
+		boolean isExists=false;
+		String username = request.getParameter("username");
+		int userId = Integer.parseInt(request.getParameter("id"));
+		
+		User user = userService.findByUsername(username);
+		if(user!=null) {
+			if(userId==0) {
+				isExists=true;
+			}else {
+				if(userId!=user.getUser_id()) {
+					isExists=true;
+				}
+			}			
+		}		
+		return isExists;
+	}
 
 
 

@@ -24,4 +24,12 @@ public interface LeadershipCoreTeamService {
 
 	void editCoreTeam(LeadershipCoreTeam leader, String path, MultipartFile file);
 
+	int getLastSequence(String activeState, String role);
+
+	void updateSequence(LeadershipCoreTeam l);
+
+	List<LeadershipCoreTeam> getAllLeadersListBySquence(String type);
+
+	void activateLeader(LeadershipCoreTeam leader);
+
 }

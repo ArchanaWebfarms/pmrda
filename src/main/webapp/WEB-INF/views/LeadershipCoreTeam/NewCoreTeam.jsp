@@ -90,6 +90,19 @@ color:red;
         <form:hidden path="id" id="id"  class="form-control"/>
         <div class="box-body" >
              <%--  <%String add=null;%>	 --%>
+             
+             <div class="row">
+			<div class="form-group col-md-12">
+				<label class="col-md-3  control-lable">Sequence<sup>*</sup></label>
+				<form:errors style="color: red"  path='sequence' />
+				<div class="col-md-7">
+					<div class="input-group">
+					  <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+					  <form:input path="sequence" id="sequence" class="form-control"/>
+				    </div> 
+				</div>
+			</div>
+		</div>
 		<div class="row">
 			<div class="form-group col-md-12">
 				<label class="col-md-3  control-lable">Name in English<sup>*</sup></label>

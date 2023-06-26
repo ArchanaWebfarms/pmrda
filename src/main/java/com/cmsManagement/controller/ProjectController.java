@@ -35,6 +35,7 @@ import com.cmsManagement.dto.GrantedPermission;
 import com.cmsManagement.model.Attachment;
 import com.cmsManagement.model.News;
 import com.cmsManagement.model.Project;
+import com.cmsManagement.model.User;
 import com.cmsManagement.model.project_features;
 import com.cmsManagement.service.AttachmentService;
 import com.cmsManagement.service.projectService;
@@ -780,6 +781,12 @@ public class ProjectController extends AbstractControllerHelper {
 					}finally{
 						try {
 							Project project=projectService.getProjectById(id);
+							User user = userService.findUserById(project.getDelete_approved_by());
+							try {
+								if(user!=null) {
+									project.setDelete_approved_name(user.getFirstName()+" "+user.getLastName());
+								}
+							} catch (Exception e) {e.printStackTrace();}							
 							model.addObject("project", project);
 
 							List<Attachment> attachmentlist = attachmentservice.getAttachmentByModuleID(project.getId(),"Project");

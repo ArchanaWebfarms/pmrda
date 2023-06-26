@@ -254,7 +254,7 @@ $(function () {
                 <li id="RTIDashboard"><a href="RTIDashboard"><i class="fa fa-circle-o"></i> RTI Dashboard </a></li>               
               <li id="metadatalist"><a href="metadatalist"><i class="fa fa-circle-o"></i> MetaData Dashboard </a></li>
                <li id="user_mannual"><a href="user_mannual"><i class="fa fa-circle-o"></i> User Mannual Dashboard </a></li>
-           
+             <li id="user_mannual"><a href="module_logs"><i class="fa fa-circle-o"></i> Logs Dashboard </a></li>
             </ul>
         </li>
             

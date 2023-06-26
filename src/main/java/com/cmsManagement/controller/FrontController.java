@@ -22,6 +22,7 @@ import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
@@ -58,6 +59,7 @@ import com.cmsManagement.model.Taluka;
 import com.cmsManagement.model.Tendors;
 import com.cmsManagement.model.Video;
 import com.cmsManagement.model.VisitorCounter;
+import com.cmsManagement.util.Constants;
 import com.cmsManagement.util.Email;
 import com.cmsManagement.util.MethodsHelper;
 import com.cmsManagement.util.NumbersEnglishToMarathi;
@@ -66,6 +68,9 @@ import com.cmsManagement.util.ValidationResponse;
 
 @Controller
 public class FrontController extends AbstractControllerHelper {
+	
+	
+	
 	private static final Logger logger = Logger.getLogger(FrontController.class);
 
 	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
@@ -911,8 +916,33 @@ public class FrontController extends AbstractControllerHelper {
 	@RequestMapping(value = "/leadership_and_core_team",method=RequestMethod.GET)
 	public ModelAndView leadership_and_core_team(ModelAndView noticeModel) {
 		try {
+			List<LeadershipCoreTeam> leaderList = leadershipCoreTeamService.getAllLeadersList("LEADER");
+			for(LeadershipCoreTeam l: leaderList) {
+				if(l.getSequence()==0) {
+					int maxSr = leadershipCoreTeamService.getLastSequence(Constants.ACTIVE_STATE,"LEADER");
+					l.setSequence(maxSr+1);
+					leadershipCoreTeamService.updateSequence(l);
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			List<LeadershipCoreTeam> leaderList = leadershipCoreTeamService.getAllLeadersList("CORE TEAM");
+			for(LeadershipCoreTeam l: leaderList) {
+				if(l.getSequence()==0) {
+					int maxSr = leadershipCoreTeamService.getLastSequence(Constants.ACTIVE_STATE,"CORE TEAM");
+					l.setSequence(maxSr+1);
+					leadershipCoreTeamService.updateSequence(l);
+				}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		try {
 			List<LeadershipCoreTeam> leaderList = leadershipCoreTeamService
-					.getAllLeadersList("LEADER");
+					.getAllLeadersListBySquence("LEADER");
 			for (LeadershipCoreTeam l : leaderList) {
 				try {
 					int indexOfSubStr = l.getDescription().indexOf("<br>");
@@ -932,7 +962,7 @@ public class FrontController extends AbstractControllerHelper {
 			noticeModel.addObject("leaderAttachList", leaderAttachList);
 
 			List<LeadershipCoreTeam> teamList = leadershipCoreTeamService
-					.getAllLeadersList("CORE TEAM");
+					.getAllLeadersListBySquence("CORE TEAM");
 			noticeModel.addObject("teamList", teamList);
 			List<Attachment> teamAttachList = attachmentservice
 					.getAttachmentByModuleType("CORE TEAM");
@@ -2801,6 +2831,76 @@ public class FrontController extends AbstractControllerHelper {
 	}
 	// =============================
 	
+	
+	@RequestMapping(value = "/govpmay")
+	public ModelAndView pmayList(ModelAndView model) throws ParseException {
+		try {
+			List<Notices> approvedNotice1 = new ArrayList<Notices>();
+			List<Notices> approvedNotice = noticesService
+					.getApprovedNoticesbyType("PMAY");
+			List<Attachment> attachmentlist1 = new ArrayList<Attachment>();
+			for (int i = 0; i < approvedNotice.size(); i++) {
+				List<Attachment> attachmentlist = attachmentservice
+						.getAttachmentByModuleID(approvedNotice.get(i)
+								.getNoticeID(), "NOTICE");
+
+				attachmentlist1.addAll(attachmentlist);
+			}
+			for (Notices n : approvedNotice) {
+				try {
+					n.setPublish_date(MethodsHelper.convertDate1(n
+							.getPublish_date()));
+					approvedNotice1.add(n);
+				} catch (ParseException e) {
+
+					e.printStackTrace();
+				}
+			}
+			model.addObject("attachmentlist", attachmentlist1);
+			model.addObject("approvedNotice", approvedNotice1);
+			List<Department> departments = departmentService.getDepartment();
+			model.addObject("departments", departments);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		model.setViewName("static/home/pmayList");
+		return model;
+	}
+	
+	@RequestMapping(value = "/mediacenter")
+	public ModelAndView mediacenter(ModelAndView model) throws ParseException {
+		try {
+			List<Notices> approvedNotice1 = new ArrayList<Notices>();
+			List<Notices> approvedNotice = noticesService
+					.getApprovedNoticesbyType("MEDIA CENTER");
+			List<Attachment> attachmentlist1 = new ArrayList<Attachment>();
+			for (int i = 0; i < approvedNotice.size(); i++) {
+				List<Attachment> attachmentlist = attachmentservice
+						.getAttachmentByModuleID(approvedNotice.get(i)
+								.getNoticeID(), "NOTICE");
+
+				attachmentlist1.addAll(attachmentlist);
+			}
+			for (Notices n : approvedNotice) {
+				try {
+					n.setPublish_date(MethodsHelper.convertDate1(n
+							.getPublish_date()));
+					approvedNotice1.add(n);
+				} catch (ParseException e) {
+
+					e.printStackTrace();
+				}
+			}
+			model.addObject("attachmentlist", attachmentlist1);
+			model.addObject("approvedNotice", approvedNotice1);
+			List<Department> departments = departmentService.getDepartment();
+			model.addObject("departments", departments);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		model.setViewName("static/home/mediacenter");
+		return model;
+	}
 	
 } // class
 

@@ -42,26 +42,13 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1> Leadership Data Table  <!-- <small>advanced tables</small> --></h1>
+      <h1> Current Opening Logs  <!-- <small>advanced tables</small> --></h1>
       <ol class="breadcrumb">
-        <li><a href="home"><i class="fa fa-dashboard"></i> <b>Home</b></a></li> 
-        <li><a href="leadershipCoreteamDash"> Leadership and Core Team Dashboard</a></li>    
-        <li class="active">Leadership List</li>   
+        <li><a href="home"><i class="fa fa-dashboard"></i> <b>Home</b></a></li>    
+        <li class="active">Current Opening Logs</li>   
       </ol>
      
-      <!-- /.row -->
-      <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">For New Leadership Register Here...</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-             	<div class="form-actions floatRight">
-					 <button type="button" onclick="location.href='newLeadership'" class="btn btn-primary btn-flat margin">Add New</button>
-				</div>
-            </div>
-            <!-- /.box-body -->
-         </div>
+     
     </section>
     
     
@@ -70,12 +57,6 @@
         <div class="col-xs-12">
           <div class="box">
 
- 			<div class="box">
- 			<h3> Leadership Data Table<!-- <small>advanced tables</small> --></h3>
-            <div class="box-header">
-             <!--  <h3 class="box-title">Data Table With Full Features</h3> -->
-             
-            </div>
             <!-- /.box-header -->
              
             <div class="box-body">
@@ -85,34 +66,22 @@
                 <thead>
                 <tr align="center">
                   <th>S.N.</th>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Action</th> 
-                  <th>Action</th> 
-                  <th>Action</th> 
-                 
+                  <th>Current Opening Title</th>
+                   <th>Action On</th>
+                  <th>Action By</th>                   
+                  <th>Action</th>                 
                   </tr>
               </thead>
                 
                     <tbody>
 				    <c:forEach var="list" items="${list}" varStatus="status">
 					<tr>
-					<td>${status.index + 1}</td>					
-				    <td>${list.initial}&nbsp;${list.name}</td>
-				    <td>${list.positon}</td>
-				    <td><input type="button" value="View Details" class="btn btn-primary btn-flat margin" onclick="return view(${list.id})"/></td>
-					<td><input type="button" value="Edit Details" class="btn btn-primary btn-flat margin" onclick="return edit(${list.id})"/><br></td>			
- 					<c:choose>
- 					<c:when test="${list.id eq 1 || list.id eq 3}">
- 					<td>-</td>
- 					</c:when>
- 					<c:otherwise>
- 					<td><input type="button" value="Delete Details" class="btn btn-primary btn-flat margin" onclick="return deleteL(${list.id})"/></td>		                        		
-	   
- 					</c:otherwise>
- 					</c:choose>
- 					
-							</tr>
+					<td>${status.index + 1}</td>				
+				    <td>${list.currentOpening.title}</td>
+				    <td>${list.updated_date}</td>
+				    <td>${list.user.firstName}&nbsp;${list.user.lastName}</td>	
+				    <td>${list.action_taken}</td>
+					</tr>
 					</c:forEach>
 				</tbody>
               </table>
@@ -148,40 +117,19 @@
 <script src="resources//dist/js/demo.js"></script>
 <!-- DataTables -->
  
-  <form:form  action="viewLeader" id="viewform" oncontextmenu="return false" onkeydown="return false;" onmousedown="return false;" >  	
-  <input type="hidden" id="viewid" name="id" />  
-  </form:form>
-  
-  <form:form  action="editLeader" id="editform" oncontextmenu="return false" onkeydown="return false;" onmousedown="return false;" >  	
-  <input type="hidden" id="editid" name="id" />  
-  </form:form>
-  
-  <form:form  action="deleteLeader" id="deleteform" oncontextmenu="return false" onkeydown="return false;" onmousedown="return false;" >  	
-  <input type="hidden" id="deleteid" name="id" />  
-  </form:form>
-  
-<script>
-function view(id){    	
-	$("#viewid").val(id);
-	$("#viewform").submit();
-	return true;
-}
+ 
 
-function edit(id){
-	$("#editid").val(id);
-	$("#editform").submit();
-	return true;
-}
 
-function deleteL(id){
-	if(myFunction()){
-		$("#deleteid").val(id);
-    	$("#deleteform").submit();
-    	return true;
-	}
-}
 
- $(function () {
+
+   
+<script type="text/javascript">
+$( document ).ready(function() {
+	$("#reportsDashboard").addClass("active");
+  	$("#MasterElement").addClass("active");
+});
+
+$(function () {
     $("#example1").DataTable();
     $('#example2').DataTable({
       "paging": true,
@@ -192,37 +140,9 @@ function deleteL(id){
       "autoWidth": false
     }); 
   });
+
+    
 </script>
- 
-<script type="text/javascript">
-    $(document).ready(function(){
-       
-            var pageURL = $(location).attr("href");
-           // alert(pageURL);
-            var newUrl = pageURL.replace("http://", "https://"); // Create new url
-           // alert(newUrl);
-            $(this).attr("href", newUrl); 
-            
-      
-    });
-    function myFunction(){
-    	
-    		 if (!confirm("Do you want to delete record?")){
-    	   	      return false;
-    	   	  }else{
-    	   		return true;
-    	   	  }
-    	
-   	 
-   }
-   
-  
-</script>
-<script>
-$( document ).ready(function() {
-	$("#leadershipCoreteamDash").addClass("active");
-  	$("#MasterElement").addClass("active");
-});
-  </script> 
+
 </body>
 </html>

@@ -17,4 +17,10 @@ public interface LeadershipCoreTeamDao {
 
 	void deleteLeader(int id);
 
+	int getLastSequence(String activeState, String role);
+
+	List<LeadershipCoreTeam> getAllLeadersListBySquence(String type);
+
+	LeadershipCoreTeam getBySequence(String string, int sequence);
+
 }

@@ -148,6 +148,8 @@ color:red;
 							<form:option value="POLICIES">POLICIES</form:option>
 							<%-- <form:option value="NOTIFICATION">NOTIFICATION</form:option> --%>
 							<form:option value="RTI">PROACTIVE DISCLOSURES</form:option>
+							<form:option value="PMAY">PMAY</form:option>
+							<form:option value="MEDIA CENTER">MEDIA CENTER</form:option>
 							
 						</form:select>
 					</div>

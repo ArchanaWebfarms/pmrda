@@ -143,6 +143,7 @@
 		          <h5><b>Deletion Approval Status : </b>${project.delete_approval_status}</h5>
 		          <h5><b>Deletion Approval Date : </b>${project.delete_approval_date}</h5>
 		          <h5><b>Deletion Approval Comment : </b>${project.delete_approval_comment}</h5> 
+		          <h5><b>Deletion Approval By : </b>${project.delete_approved_name}</h5> 
 		        </div>
 		      </div>
 		      <br>

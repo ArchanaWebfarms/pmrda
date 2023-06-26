@@ -162,12 +162,13 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
     public User findByUsername(String username){
 		 Criteria criteria = getSession().createCriteria(User.class,"user");
 			criteria.add(Restrictions.eq("user.username", username));
+			criteria.add(Restrictions.eq("user.state", Constants.ACTIVE_STATE));
 			List<User> list =  criteria.list();
 			if(list.size() > 0){
 				return (User) criteria.list().get(0);
 			}
 			else{
-				return new User();
+				return null;
 			}
 	}
 
@@ -231,6 +232,7 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 	public User findUserByEmail(String email) {
 		Criteria criteria = getSession().createCriteria(User.class);
 		criteria.add(Restrictions.eq("email", email));
+		criteria.add(Restrictions.eq("state", Constants.ACTIVE_STATE));
 		return (User) criteria.uniqueResult();
 	}
 

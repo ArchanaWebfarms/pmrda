@@ -16,7 +16,7 @@
   response.setDateHeader ("Expires", 0);  
   %>
   <meta name="viewport" content="width=device-width" />
-      <title>.:: <spring:message code="pressnotes.title"  /> ::.</title>
+      <title>.:: <spring:message code="Header.Menu.AboutUs.mediacntr"  /> ::.</title>
       <link rel="stylesheet" href="resources/plugins/datepicker/datepicker3.css">
        <link rel="icon" href="staticResources/images/PMRDALogo1.png" type="image/png" >
       
@@ -39,11 +39,11 @@
                     <ul>
              <li> <a href="#"><spring:message code="Header.Menu.AboutUs.mediacntr"  />  </a></li>
 						    
-						      <li><a class="active" href="press_notes"><spring:message code="pressnotes.title"  /></a></li>
+						      <li><a href="press_notes"><spring:message code="pressnotes.title"  /></a></li>
 						      <li><a href="pmrda_news"><spring:message code="pagetitle.whatnew"  /></a></li>
 						      <li><a href="videos"><spring:message code="index.module-ct.span1"  /></a></li>
 						       <li><a href="gallery"><spring:message code="index.module-ct.span2"  /></a></li>
-                        <li><a href="mediacenter"><spring:message code="Header.Menu.AboutUs.mediacntr"  /></a></li>
+                        <li><a class="active" href="mediacenter"><spring:message code="Header.Menu.AboutUs.mediacntr"  /></a></li>
                      </ul>
                   </div>
             </div>
@@ -52,7 +52,7 @@
             <div class="itemHeader" style="width:100%;">
 
                <h3 class="itemTitle">
-               <spring:message code="pressnotes.title"/>
+               <spring:message code="Header.Menu.AboutUs.mediacntr"/>
                <%-- <spring:message code="pressnotes.title"/><a href ="Archive_PressNotes_notice" style="color:green;font-size: 22px"  class="archiveLink"><spring:message code="archive.archived.pressnotes" /></a> --%>
                </h3>
 
@@ -359,7 +359,7 @@ function attachmentDownload(id){
        	
        	
             $.ajax({
-       		 url:"noticebydates?fromdate="+fromdate+"&todate="+todate+"&type=PRESS NOTES",
+       		 url:"noticebydates?fromdate="+fromdate+"&todate="+todate+"&type=MEDIA CENTER",
        			success:function(response){
        				console.log(response)
        				
@@ -461,7 +461,7 @@ function searchNoticesByDepartment(){
   var departments = $("#departments").val();
  
      $.ajax({
-			url:"searchNoticesByDepartment?departments="+departments+"&noticeType=PRESS NOTES"+"&category=NOTICE",
+			url:"searchNoticesByDepartment?departments="+departments+"&noticeType=MEDIA CENTER"+"&category=NOTICE",
 			success:function(response){
 				//alert(response.length);
 				console.log(response)

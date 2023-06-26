@@ -188,6 +188,9 @@
                <a href="Maps" >
                   <spring:message code="Header.Menu.AboutUs.maps" />
                </a>
+               <a href="govpmay" >
+                  <spring:message code="contact.div.h55.pmay" />
+               </a>
             </div>
          </div>
          <div class="dropdown">
@@ -240,6 +243,9 @@
                </a>
                <a href="gallery">
                   <spring:message code="index.module-ct.span2" />
+               </a>
+                <a href="mediacenter">
+                  <spring:message code="Header.Menu.AboutUs.mediacntr" />
                </a>
             </div>
          </div>

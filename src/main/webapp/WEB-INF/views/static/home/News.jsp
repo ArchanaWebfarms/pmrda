@@ -68,7 +68,7 @@
 						      <li><a class="active" href="pmrda_news"><spring:message code="pagetitle.whatnew"  /></a></li>
 						      <li><a href="videos"><spring:message code="index.module-ct.span1"  /></a></li>
 						       <li><a href="gallery"><spring:message code="index.module-ct.span2"  /></a></li>
-                       
+                        <li><a href="mediacenter"><spring:message code="Header.Menu.AboutUs.mediacntr"  /></a></li>
                      </ul>
                   </div>
             </div>

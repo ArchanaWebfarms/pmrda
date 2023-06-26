@@ -125,9 +125,9 @@
 				<div class="col-md-7">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-						<form:input type="text" path="username" id="username"  class="form-control"/>   <!-- onkeyup="checkname();" -->
+						<form:input type="text" path="username" id="username"  class="form-control" onkeyup="validateUsername()"/>   <!-- onkeyup="checkname();" -->
 					</div>
-				</div>
+				</div><span style="color: red"  id="usernameError"></span>
 			</div>
 		</div>
 
@@ -188,9 +188,9 @@
 				<div class="col-md-7">
 					 <div class="input-group">
 					  <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-						<form:input type="text" path="email" id="email" class="form-control"/>
+						<form:input type="text" path="email" id="email" class="form-control" onkeyup="validateEmail()"/>
 					 </div>
-				</div>
+				</div><span style="color: red"  id="emailError"></span>
 			</div>
 		</div>	  		
 		  		
@@ -251,7 +251,7 @@
 		
 	          <div class="box-footer">
                   <div class="form-actions floatRight">
-					 <input type="submit" value="Save"  class="btn btn-primary btn-flat margin"><%--  or <a href="<c:url value='/admin' />">Cancel</a>  id ="Save" onclick="return myFunction()"--%>
+					 <input type="submit" id="submitBtn" value="Save"  class="btn btn-primary btn-flat margin"><%--  or <a href="<c:url value='/admin' />">Cancel</a>  id ="Save" onclick="return myFunction()"--%>
 				 	 <input type="button" value="Cancel" onclick="location.href='userList'" class="btn btn-success">
 				  	 <input type="reset" value="Reset"  class="btn">	
 				  </div>
@@ -350,8 +350,7 @@
 				return false;
 			}  
 		}
-	</script>
-<script>
+	
 function GetSpecailCharactor(){
 	
     var departments = "GetSpecailCharactor";
@@ -384,8 +383,7 @@ function GetSpecailCharactor(){
 		}); 
 	 
 	} 
-</script>
-<script>
+
 var firstName = $("#firstName").val();
 var lastName = $("#lastName").val();
 var username = $("#username").val();
@@ -404,8 +402,7 @@ if(firstName!="" && lastName!="" && username!="" && password!="" && email!="" &&
 	}
 	 });
 });
-</script>
-<script>
+
 $('#username').on('keypress', function (event) {
     var regex = new RegExp("^[a-zA-Z0-9]+$");
     var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
@@ -414,8 +411,7 @@ $('#username').on('keypress', function (event) {
        return false;
     }
 });
-</script>
-<script type="text/javascript">
+
         function CheckPasswordStrength(password) {
             var password_strength = document.getElementById("passwordError");
 
@@ -477,10 +473,7 @@ $('#username').on('keypress', function (event) {
         }
         
            
-       
-    </script>
    
-    <script>
     $("#Save").click(function(){
         var myLength = $("#password").val().length;
       //	 alert(myLength);
@@ -500,13 +493,50 @@ $('#username').on('keypress', function (event) {
             } 
         
 });
-    
-</script>
-<script>
+ 
 $( document ).ready(function() {
 	$("#userList").addClass("active");
   	$("#MasterElement").addClass("active");
 });
+
+function validateEmail(){
+	var email = $("#email").val();
+	var id = 0;
+	
+	 $.ajax({
+			url:"validateUserEmail?email="+email+"&id="+id,
+			success:function(response){	
+				if(response==true){
+		    	 document.getElementById("emailError").innerHTML="Email Already Exists.";
+		    	 $("#email").val("")
+		    	 document.getElementById("submitBtn").disabled = true;
+		     }else{ 
+		    	 document.getElementById("emailError").innerHTML="";
+		     document.getElementById("submitBtn").disabled = false;
+		     }
+			}
+		}); 
+}
+
+function validateUsername(){
+	var username = $("#username").val();
+	var id = 0;
+	
+	 $.ajax({
+			url:"validateUsername?username="+username+"&id="+id,
+			success:function(response){	
+				if(response==true){
+		    	 document.getElementById("usernameError").innerHTML="Username Already Exists.";
+		    	 $("#username").val("")
+		    	 document.getElementById("submitBtn").disabled = true;
+		     }else{ 
+		    	 document.getElementById("usernameError").innerHTML="";
+		     document.getElementById("submitBtn").disabled = false;
+		     }
+			}
+		}); 
+}
+
   </script>
 </body>
 </html>
